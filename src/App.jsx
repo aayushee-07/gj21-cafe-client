@@ -21,7 +21,7 @@ import Cart from "./pages/cart.jsx";
 import Checkout from "./pages/checkout.jsx";
 import Favorites from "./pages/favourite.jsx";
 import Login from "./pages/login.jsx";
-import Profile from "./pages/Profile.jsx";
+import Profile from "./pages/profile.jsx";
 import Register from "./pages/register.jsx";
 import TrackOrder from "./pages/trackorder.jsx";
 import OrderHistory from "./pages/orderhistory.jsx";
