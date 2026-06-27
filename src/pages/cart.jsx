@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
+const SERVER_URL = import.meta.env.VITE_API_BASE_URL.replace("/api", "");
 
 export default function Cart({
   cartItems,
@@ -77,7 +78,7 @@ export default function Cart({
 
               {/* IMAGE */}
               <img
-                src={`http://localhost:5001${item.image}`}
+             src={`${SERVER_URL}${item.image}`}
                 alt={item.name}
                 className="w-20 h-20 object-cover rounded-xl flex-shrink-0
                 group-hover:scale-105 transition-transform duration-300"

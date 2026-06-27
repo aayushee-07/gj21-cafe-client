@@ -1,7 +1,7 @@
 import React from "react";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+const SERVER_URL = import.meta.env.VITE_API_BASE_URL.replace("/api", "");
 export default function Favorites({ favorites, toggleFavorite, addToCart }) {
 
   // EMPTY STATE
@@ -72,7 +72,7 @@ export default function Favorites({ favorites, toggleFavorite, addToCart }) {
               {/* IMAGE */}
               <div className="relative overflow-hidden">
                 <img
-                  src={`http://localhost:5001${item.image}`}
+                src={`${SERVER_URL}${item.image}`}
                   alt={item.name}
                   className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500"
                 />

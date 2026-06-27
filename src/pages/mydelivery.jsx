@@ -1,32 +1,30 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const BASE = "http://localhost:5001/api";
+import api from "../lib/apiClient";
 
 // ── STATUS CONFIG ──
 const STATUS_CFG = {
-  assigned:         { label: "Assigned",   color: "#2563eb", bg: "#eff6ff",  border: "#bfdbfe", icon: "📋" },
-  pickup:           { label: "Pickup",     color: "#7c3aed", bg: "#f5f3ff",  border: "#ddd6fe", icon: "📦" },
-  intransit:        { label: "In Transit", color: "#d97706", bg: "#fffbeb",  border: "#fde68a", icon: "🚚" },
-  delivered:        { label: "Delivered",  color: "#059669", bg: "#ecfdf5",  border: "#a7f3d0", icon: "✅" },
-  cancelled:        { label: "Cancelled",  color: "#dc2626", bg: "#fef2f2",  border: "#fecaca", icon: "❌" },
+  assigned: { label: "Assigned", color: "#2563eb", bg: "#eff6ff", border: "#bfdbfe", icon: "📋" },
+  pickup: { label: "Pickup", color: "#7c3aed", bg: "#f5f3ff", border: "#ddd6fe", icon: "📦" },
+  intransit: { label: "In Transit", color: "#d97706", bg: "#fffbeb", border: "#fde68a", icon: "🚚" },
+  delivered: { label: "Delivered", color: "#059669", bg: "#ecfdf5", border: "#a7f3d0", icon: "✅" },
+  cancelled: { label: "Cancelled", color: "#dc2626", bg: "#fef2f2", border: "#fecaca", icon: "❌" },
 };
 
 const FILTER_TABS = [
-  { key: "all",       label: "All"        },
-  { key: "assigned",  label: "Assigned"   },
-  { key: "pickup",    label: "Pickup"     },
+  { key: "all", label: "All" },
+  { key: "assigned", label: "Assigned" },
+  { key: "pickup", label: "Pickup" },
   { key: "intransit", label: "In Transit" },
-  { key: "delivered", label: "Delivered"  },
-  { key: "cancelled", label: "Cancelled"  },
+  { key: "delivered", label: "Delivered" },
+  { key: "cancelled", label: "Cancelled" },
 ];
 
 // ── One-step-forward action per status ──
 const NEXT_ACTION = {
-  assigned:  { status: "pickup",    label: "Mark Picked Up",          icon: "📦" },
-  pickup:    { status: "intransit", label: "Mark Out for Delivery",   icon: "🚚" },
-  intransit: { status: "delivered", label: "Mark Delivered",          icon: "✅" },
+  assigned: { status: "pickup", label: "Mark Picked Up", icon: "📦" },
+  pickup: { status: "intransit", label: "Mark Out for Delivery", icon: "🚚" },
+  intransit: { status: "delivered", label: "Mark Delivered", icon: "✅" },
 };
 
 function getDeliveryUser() {
@@ -39,15 +37,15 @@ function getDeliveryUser() {
 }
 
 export default function MyDeliveries() {
-  const [orders,        setOrders]        = useState([]);
-  const [loading,       setLoading]       = useState(true);
-  const [filter,        setFilter]        = useState("all");
-  const [search,        setSearch]        = useState("");
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const [updating,      setUpdating]      = useState(null);
-  const [toast,         setToast]         = useState(null);
+  const [updating, setUpdating] = useState(null);
+  const [toast, setToast] = useState(null);
   const toastTimer = useRef(null);
-  const navigate   = useNavigate();
+  const navigate = useNavigate();
 
   // ── AUTH ──
   useEffect(() => {
@@ -68,7 +66,7 @@ export default function MyDeliveries() {
     if (!u) return;
     setLoading(true);
     try {
-      const res = await axios.get(`${BASE}/delivery/orders`, {
+      const res = await api.get("/delivery/orders", {
         headers: { Authorization: `Bearer ${u.token}` },
       });
       setOrders(res.data.orders || res.data.data || res.data || []);
@@ -87,10 +85,14 @@ export default function MyDeliveries() {
     const u = getDeliveryUser();
     setUpdating(orderId);
     try {
-      await axios.put(
-        `${BASE}/delivery/orders/${orderId}/status`,
+      await api.put(
+        `/delivery/orders/${orderId}/status`,
         { deliveryStatus: newStatus },
-        { headers: { Authorization: `Bearer ${u.token}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${u.token}`,
+          },
+        }
       );
       // ✅ update deliveryStatus (not status) to match filter logic
       setOrders(prev => prev.map(o =>
@@ -111,25 +113,25 @@ export default function MyDeliveries() {
     const matchFilter = filter === "all" || status === filter;
     const q = search.toLowerCase().trim();
     if (!q) return matchFilter;
-    const id    = (o._id || "").slice(-6).toLowerCase();
-    const name  = (o.deliveryAddress?.fullName || o.user?.name || "").toLowerCase();
+    const id = (o._id || "").slice(-6).toLowerCase();
+    const name = (o.deliveryAddress?.fullName || o.user?.name || "").toLowerCase();
     const phone = (o.deliveryAddress?.phone || o.user?.phone || "").toLowerCase();
     return matchFilter && (id.includes(q) || name.includes(q) || phone.includes(q));
   });
 
   // ── STATS ── ✅ use deliveryStatus
   const stats = {
-    total:     orders.length,
-    assigned:  orders.filter(o => o.deliveryStatus === "assigned").length,
-    pickup:    orders.filter(o => o.deliveryStatus === "pickup").length,
-    transit:   orders.filter(o => o.deliveryStatus === "intransit").length,
+    total: orders.length,
+    assigned: orders.filter(o => o.deliveryStatus === "assigned").length,
+    pickup: orders.filter(o => o.deliveryStatus === "pickup").length,
+    transit: orders.filter(o => o.deliveryStatus === "intransit").length,
     delivered: orders.filter(o => o.deliveryStatus === "delivered").length,
     cancelled: orders.filter(o => o.deliveryStatus === "cancelled").length,
   };
 
   // ── helper ──
-  const getCustomerName  = (o) => o.deliveryAddress?.fullName || o.user?.name || "—";
-  const getCustomerPhone = (o) => o.deliveryAddress?.phone   || o.user?.phone || "—";
+  const getCustomerName = (o) => o.deliveryAddress?.fullName || o.user?.name || "—";
+  const getCustomerPhone = (o) => o.deliveryAddress?.phone || o.user?.phone || "—";
 
   return (
     <div style={{ minHeight: "100vh", background: "#f5f0e8", fontFamily: "'Lora','Georgia',serif", color: "#1f2937" }}>
@@ -139,7 +141,7 @@ export default function MyDeliveries() {
         <div style={{
           position: "fixed", top: 20, right: 20, zIndex: 9999,
           background: toast.type === "error" ? "#fff1f1" : "#f0fdf4",
-          color:      toast.type === "error" ? "#b91c1c" : "#15803d",
+          color: toast.type === "error" ? "#b91c1c" : "#15803d",
           border: `1px solid ${toast.type === "error" ? "#fca5a5" : "#86efac"}`,
           padding: "12px 20px", borderRadius: 12, fontSize: 14, fontWeight: 600,
           boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
@@ -175,9 +177,9 @@ export default function MyDeliveries() {
         {/* ── STATS ── */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 24 }}>
           {[
-            { label: "Total",     value: stats.total,     icon: "📦", accent: "#2563eb", bg: "#eff6ff", border: "#bfdbfe" },
+            { label: "Total", value: stats.total, icon: "📦", accent: "#2563eb", bg: "#eff6ff", border: "#bfdbfe" },
             { label: "Delivered", value: stats.delivered, icon: "✅", accent: "#059669", bg: "#ecfdf5", border: "#a7f3d0" },
-            { label: "In Transit",value: stats.transit,   icon: "🚚", accent: "#d97706", bg: "#fffbeb", border: "#fde68a" },
+            { label: "In Transit", value: stats.transit, icon: "🚚", accent: "#d97706", bg: "#fffbeb", border: "#fde68a" },
             { label: "Cancelled", value: stats.cancelled, icon: "❌", accent: "#dc2626", bg: "#fef2f2", border: "#fecaca" },
           ].map(s => (
             <div key={s.label} style={{
@@ -220,9 +222,9 @@ export default function MyDeliveries() {
             return (
               <button key={tab.key} onClick={() => setFilter(tab.key)} style={{
                 padding: "7px 16px", borderRadius: 10,
-                border:      filter === tab.key ? "1px solid #c89b3c" : "1px solid #e5e7eb",
-                background:  filter === tab.key ? "#fdf6e9" : "#fff",
-                color:       filter === tab.key ? "#c89b3c"  : "#6b7280",
+                border: filter === tab.key ? "1px solid #c89b3c" : "1px solid #e5e7eb",
+                background: filter === tab.key ? "#fdf6e9" : "#fff",
+                color: filter === tab.key ? "#c89b3c" : "#6b7280",
                 fontSize: 13, fontWeight: 700, cursor: "pointer",
                 fontFamily: "inherit", transition: "all 0.15s",
               }}>
@@ -230,7 +232,7 @@ export default function MyDeliveries() {
                 <span style={{
                   marginLeft: 6, fontSize: 11, padding: "1px 7px", borderRadius: 5,
                   background: filter === tab.key ? "#f5e6c8" : "#f3f4f6",
-                  color:      filter === tab.key ? "#92400e" : "#9ca3af",
+                  color: filter === tab.key ? "#92400e" : "#9ca3af",
                   fontWeight: 800,
                 }}>
                   {count}
@@ -260,7 +262,7 @@ export default function MyDeliveries() {
                 padding: "12px 20px", background: "#f9fafb",
                 borderBottom: "1px solid #e5e7eb",
               }}>
-                {["Order ID","Customer","Phone","Address","Items","Amount","Status","Date","View"].map(h => (
+                {["Order ID", "Customer", "Phone", "Address", "Items", "Amount", "Status", "Date", "View"].map(h => (
                   <div key={h} style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", letterSpacing: "0.07em", textTransform: "uppercase", fontFamily: "sans-serif" }}>{h}</div>
                 ))}
               </div>
@@ -269,14 +271,14 @@ export default function MyDeliveries() {
               {filtered.map((order, idx) => {
                 // ✅ use deliveryStatus for cfg lookup
                 const status = order.deliveryStatus || "assigned";
-                const cfg    = STATUS_CFG[status] || STATUS_CFG.assigned;
+                const cfg = STATUS_CFG[status] || STATUS_CFG.assigned;
                 const address = order.deliveryAddress || {};
-                const items   = order.items || order.orderItems || [];
-                const total   = order.finalTotal || order.totalPrice || order.total || 0;
-                const name    = getCustomerName(order);
-                const phone   = getCustomerPhone(order);
+                const items = order.items || order.orderItems || [];
+                const total = order.finalTotal || order.totalPrice || order.total || 0;
+                const name = getCustomerName(order);
+                const phone = getCustomerPhone(order);
                 const shortId = order._id?.slice(-6).toUpperCase();
-                const date    = order.createdAt
+                const date = order.createdAt
                   ? new Date(order.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short" })
                   : "—";
                 const addrStr = [address.area, address.city].filter(Boolean).join(", ") || "—";
@@ -332,10 +334,10 @@ export default function MyDeliveries() {
             <div className="mobile-cards" style={{ display: "none", flexDirection: "column", gap: 10 }}>
               {filtered.map((order, idx) => {
                 const status = order.deliveryStatus || "assigned";
-                const cfg    = STATUS_CFG[status] || STATUS_CFG.assigned;
-                const name   = getCustomerName(order);
-                const phone  = getCustomerPhone(order);
-                const total  = order.finalTotal || order.totalPrice || 0;
+                const cfg = STATUS_CFG[status] || STATUS_CFG.assigned;
+                const name = getCustomerName(order);
+                const phone = getCustomerPhone(order);
+                const total = order.finalTotal || order.totalPrice || 0;
                 return (
                   <div key={order._id} style={{
                     background: "#fff", border: "1px solid #e5e7eb",
@@ -394,15 +396,15 @@ export default function MyDeliveries() {
 // ─────────────────────────────────────
 function ViewModal({ order, onClose, onUpdateStatus, updating }) {
   const address = order.deliveryAddress || {};
-  const items   = order.items || order.orderItems || [];
-  const total   = order.finalTotal || order.totalPrice || order.total || 0;
-  const name    = address.fullName || order.user?.name || "—";
-  const phone   = address.phone   || order.user?.phone || "—";
+  const items = order.items || order.orderItems || [];
+  const total = order.finalTotal || order.totalPrice || order.total || 0;
+  const name = address.fullName || order.user?.name || "—";
+  const phone = address.phone || order.user?.phone || "—";
 
   // ✅ use deliveryStatus
   const status = order.deliveryStatus || "assigned";
-  const cfg    = STATUS_CFG[status] || STATUS_CFG.assigned;
-  const next   = NEXT_ACTION[status];
+  const cfg = STATUS_CFG[status] || STATUS_CFG.assigned;
+  const next = NEXT_ACTION[status];
 
   const fullAddress = [
     address.house, address.street, address.area,
@@ -459,17 +461,17 @@ function ViewModal({ order, onClose, onUpdateStatus, updating }) {
 
           {/* Customer */}
           <Section title="👤 Customer Details" bg="#eff6ff" border="#bfdbfe">
-            <InfoRow label="Name"  value={name} />
+            <InfoRow label="Name" value={name} />
             <InfoRow label="Phone" value={<a href={`tel:${phone}`} style={{ color: "#2563eb", fontWeight: 700, textDecoration: "none" }}>{phone}</a>} />
           </Section>
 
           {/* Address */}
           <Section title="📍 Delivery Address" bg="#f0fdf4" border="#a7f3d0">
-            {address.house    && <InfoRow label="House"    value={address.house}    />}
-            {address.street   && <InfoRow label="Street"   value={address.street}   />}
-            {address.area     && <InfoRow label="Area"     value={address.area}     />}
-            {address.city     && <InfoRow label="City"     value={address.city}     />}
-            {address.pincode  && <InfoRow label="Pincode"  value={address.pincode}  />}
+            {address.house && <InfoRow label="House" value={address.house} />}
+            {address.street && <InfoRow label="Street" value={address.street} />}
+            {address.area && <InfoRow label="Area" value={address.area} />}
+            {address.city && <InfoRow label="City" value={address.city} />}
+            {address.pincode && <InfoRow label="Pincode" value={address.pincode} />}
             {address.landmark && <InfoRow label="Landmark" value={address.landmark} />}
             {!fullAddress && <div style={{ fontSize: 13, color: "#9ca3af" }}>No address provided</div>}
           </Section>
@@ -480,7 +482,7 @@ function ViewModal({ order, onClose, onUpdateStatus, updating }) {
               <>
                 {items.map((item, i) => {
                   const iname = item.name || item.menuItem?.name || `Item ${i + 1}`;
-                  const qty   = item.quantity || 1;
+                  const qty = item.quantity || 1;
                   const price = item.price || item.menuItem?.price || 0;
                   return (
                     <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "5px 0", borderBottom: i < items.length - 1 ? "1px solid #f3f4f6" : "none" }}>
@@ -493,7 +495,7 @@ function ViewModal({ order, onClose, onUpdateStatus, updating }) {
                   );
                 })}
                 <div style={{ borderTop: "1px dashed #e5e7eb", marginTop: 8, paddingTop: 8 }}>
-                  <InfoRow label="Subtotal"     value={`₹${order.subtotal || 0}`} />
+                  <InfoRow label="Subtotal" value={`₹${order.subtotal || 0}`} />
                   <InfoRow label="Delivery Fee" value={`₹${order.deliveryFee || 0}`} />
                   {order.discount > 0 && <InfoRow label="Discount" value={`− ₹${order.discount}`} accent="#059669" />}
                   <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4, paddingTop: 4, borderTop: "1px solid #e5e7eb" }}>
@@ -620,7 +622,7 @@ function LoadingSkeleton() {
   return (
     <div style={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 18, overflow: "hidden" }}>
       <div style={{ display: "grid", gridTemplateColumns: "0.7fr 1.4fr 1fr 1.8fr 0.8fr 0.8fr 1fr 0.8fr 0.6fr", padding: "12px 20px", background: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
-        {["Order ID","Customer","Phone","Address","Items","Amount","Status","Date","View"].map(h => (
+        {["Order ID", "Customer", "Phone", "Address", "Items", "Amount", "Status", "Date", "View"].map(h => (
           <div key={h} style={{ fontSize: 11, fontWeight: 700, color: "#d1d5db", letterSpacing: "0.07em", textTransform: "uppercase" }}>{h}</div>
         ))}
       </div>
@@ -630,7 +632,7 @@ function LoadingSkeleton() {
           padding: "16px 20px", borderBottom: i < 3 ? "1px solid #f3f4f6" : "none",
           alignItems: "center", animation: "pulse 1.5s ease infinite", animationDelay: `${i * .1}s`,
         }}>
-          {[48,100,80,120,40,50,72,50,44].map((w, j) => (
+          {[48, 100, 80, 120, 40, 50, 72, 50, 44].map((w, j) => (
             <div key={j} style={{ width: w, height: j === 6 ? 22 : j === 8 ? 28 : 12, background: "#f3f4f6", borderRadius: j === 6 || j === 8 ? 7 : 4 }} />
           ))}
         </div>
@@ -649,8 +651,8 @@ function EmptyState({ search, filter }) {
         {search
           ? `No results for "${search}".`
           : filter !== "all"
-          ? `No ${filter.replaceAll("_", " ")} orders.`
-          : "You have no assigned deliveries yet."}
+            ? `No ${filter.replaceAll("_", " ")} orders.`
+            : "You have no assigned deliveries yet."}
       </div>
     </div>
   );

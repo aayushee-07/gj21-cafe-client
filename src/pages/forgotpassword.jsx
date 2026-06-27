@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const BASE = "http://localhost:5001/api";
+import api from "../lib/apiClient";
 
 export default function ForgotPassword() {
     const [step, setStep] = useState(1); // 1=email, 2=otp+newpass, 3=success
@@ -23,7 +21,7 @@ export default function ForgotPassword() {
         if (!email.trim()) return setError("Please enter your email address.");
         setLoading(true);
         try {
-            await axios.post(`${BASE}/auth/forgot-password`, {
+            await api.post("/auth/forgot-password", {
                 email: email.trim().toLowerCase(),
             });
             setStep(2);
@@ -48,7 +46,7 @@ export default function ForgotPassword() {
         if (newPassword !== confirmPassword) return setError("Passwords do not match.");
         setLoading(true);
         try {
-            await axios.post(`${BASE}/auth/reset-password`, {
+            await api.post("/auth/reset-password", {
                 email: email.trim().toLowerCase(),
                 otp: otp.trim(),
                 password: newPassword,

@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const BASE = "http://localhost:5001/api";
+import api from "../lib/apiClient";
 
 export default function ResetPassword() {
-  const [step, setStep]               = useState(2); // Starts at step 2 (Reset form), 3 = success
-  const [email, setEmail]             = useState("");
-  const [otp, setOtp]                 = useState("");
-  const [newPassword, setNewPassword]     = useState("");
+  const [step, setStep] = useState(2); // Starts at step 2 (Reset form), 3 = success
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [loading, setLoading]     = useState(false);
-  const [error, setError]         = useState("");
-  const [showPass, setShowPass]   = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
 
   // ── STEP 2: Verify OTP + set new password ──
@@ -20,24 +18,24 @@ export default function ResetPassword() {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setError("");
-    
-    if (!email.trim())           return setError("Please enter your email address.");
-    if (!otp.trim())             return setError("Please enter the OTP sent to your email.");
+
+    if (!email.trim()) return setError("Please enter your email address.");
+    if (!otp.trim()) return setError("Please enter the OTP sent to your email.");
     if (newPassword.length < 6) return setError("Password must be at least 6 characters.");
     if (newPassword !== confirmPassword) return setError("Passwords do not match.");
-    
+
     setLoading(true);
     try {
-      await axios.post(`${BASE}/auth/reset-password`, {
-        email:       email.trim().toLowerCase(),
-        otp:         otp.trim(),
+      await api.post("/auth/reset-password", {
+        email: email.trim().toLowerCase(),
+        otp: otp.trim(),
         newPassword,
       });
       setStep(3);
     } catch (err) {
       setError(
         err.response?.data?.message ||
-        err.response?.data?.error   ||
+        err.response?.data?.error ||
         "Invalid or expired OTP. Please try again."
       );
     } finally {

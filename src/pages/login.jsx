@@ -1,7 +1,7 @@
 // src/pages/Login.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../lib/apiClient";
 
 export default function Login({ setUser }) {
   const [email, setEmail] = useState("");
@@ -19,13 +19,10 @@ export default function Login({ setUser }) {
     console.log("LOGIN DATA:", email, password);
 
     try {
-      const res = await axios.post(
-        "http://localhost:5001/api/auth/login",
-        {
-          email: email.trim().toLowerCase(),
-          password: password.trim(),
-        }
-      );
+      const res = await api.post("/auth/login", {
+        email: email.trim().toLowerCase(),
+        password: password.trim(),
+      });
 
       console.log("RESPONSE:", res.data); // 🔥 ADD THIS
 
@@ -97,29 +94,29 @@ export default function Login({ setUser }) {
           <form onSubmit={handleSubmit} className="space-y-5">
 
             <Field label="Email">
-  <input
-    type="email"
-    value={email}
-    placeholder="you@example.com"
-    required
-    autoComplete="off"
-    onChange={(e) => setEmail(e.target.value)}
-    className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all"
-    style={{
-      background: "#faf8f5",
-      border: "1px solid #e8d5be",
-      color: "#3d2b1f"
-    }}
-    onFocus={e => {
-      e.target.style.borderColor = "#c89b3c";
-      e.target.style.boxShadow = "0 0 0 3px rgba(200,155,60,0.15)";
-    }}
-    onBlur={e => {
-      e.target.style.borderColor = "#e8d5be";
-      e.target.style.boxShadow = "none";
-    }}
-  />
-</Field>
+              <input
+                type="email"
+                value={email}
+                placeholder="you@example.com"
+                required
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl text-sm outline-none transition-all"
+                style={{
+                  background: "#faf8f5",
+                  border: "1px solid #e8d5be",
+                  color: "#3d2b1f"
+                }}
+                onFocus={e => {
+                  e.target.style.borderColor = "#c89b3c";
+                  e.target.style.boxShadow = "0 0 0 3px rgba(200,155,60,0.15)";
+                }}
+                onBlur={e => {
+                  e.target.style.borderColor = "#e8d5be";
+                  e.target.style.boxShadow = "none";
+                }}
+              />
+            </Field>
 
             <div>
               <div className="flex justify-between items-center mb-2">
