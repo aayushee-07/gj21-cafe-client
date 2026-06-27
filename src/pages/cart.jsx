@@ -1,7 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
-const SERVER_URL = import.meta.env.VITE_API_BASE_URL.replace("/api", "");
+const SERVER_URL = (
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api"
+).replace("/api", "");
 
 export default function Cart({
   cartItems,

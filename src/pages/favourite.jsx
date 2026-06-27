@@ -1,7 +1,9 @@
 import React from "react";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-const SERVER_URL = import.meta.env.VITE_API_BASE_URL.replace("/api", "");
+const SERVER_URL = (
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api"
+).replace("/api", "");
 export default function Favorites({ favorites, toggleFavorite, addToCart }) {
 
   // EMPTY STATE

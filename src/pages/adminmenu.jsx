@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import api from "../lib/apiClient";
 import { Pencil, Trash2, Plus, PackageCheck, PackageX, Check, X } from "lucide-react";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL.replace("/api", "");
+const BASE_URL = (
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api"
+).replace("/api", "");
 
 export default function AdminMenu() {
 
