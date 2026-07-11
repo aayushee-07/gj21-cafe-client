@@ -3,7 +3,7 @@ import cafeImage from "/cafelogo1.png";
 
 function Home() {
   return (
-    <section className="relative bg-[#1a0e0c] text-white min-h-screen md:h-[88vh] flex flex-col overflow-x-hidden">
+    <section className="relative bg-[#1a0e0c] text-white h-[88vh] flex flex-col overflow-hidden">
       {/* ── SUBTLE BACKGROUND — no glow, just a soft vignette ── */}
       <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-[#2e1a12]/60 to-[#1a0e0c] pointer-events-none" />
 
@@ -11,7 +11,7 @@ function Home() {
       <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#c89b3c]/5 to-transparent pointer-events-none" />
 
       {/* ── MAIN CONTENT — fills remaining height ── */}
-      <div className="relative flex-1 max-w-7xl mx-auto px-4 md:px-10 w-full grid md:grid-cols-2 items-center gap-6 py-10 md:py-0">
+      <div className="relative flex-1 max-w-7xl mx-auto px-4 md:px-10 w-full grid md:grid-cols-2 items-center gap-6">
         {/* ── LEFT TEXT ── */}
         <div className="flex flex-col gap-5">
           {/* Eyebrow badge */}
@@ -21,7 +21,7 @@ function Home() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[60px] font-extrabold leading-[1.1] tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-[60px] font-extrabold leading-[1.1] tracking-tight">
             Welcome to
             <br />
             <span className="text-[#c89b3c]">GJ 21</span>{" "}
@@ -55,7 +55,7 @@ function Home() {
           </div>
 
           {/* Stats */}
-          <div className="flex gap-4 sm:gap-6 pt-1">
+          <div className="flex gap-6 pt-1">
             {[
               ["4.6+", "Star Rating"],
               ["2+", "Years Open"],
@@ -76,7 +76,7 @@ function Home() {
           <img
             src={cafeImage}
             alt="GJ 21 Cafe Logo"
-            className="w-48 sm:w-64 md:w-[440px] lg:w-[520px] max-w-full object-contain mix-blend-screen"
+            className="w-[360px] md:w-[440px] lg:w-[520px] object-contain mix-blend-screen"
             style={{ filter: "contrast(1.05)" }}
           />
         </div>
