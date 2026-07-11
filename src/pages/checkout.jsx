@@ -253,7 +253,7 @@ export default function Checkout({ cartItems, clearCart }) {
           </div>
 
           {/* ── RIGHT — ORDER SUMMARY ── */}
-          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-6 sticky top-24">
+          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-6 md:sticky md:top-24">
 
             <h2 className="text-xs font-semibold text-[#c89b3c] tracking-wide uppercase
             mb-6 flex items-center gap-2">
