@@ -145,50 +145,52 @@ export default function Checkout({ cartItems, clearCart }) {
 
   if (!cartItems.length) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-amber-50">
-        <p className="text-stone-400 text-[15px]">Your cart is empty.</p>
+      <div className="min-h-screen flex items-center justify-center bg-amber-50 px-4">
+        <p className="text-stone-400 text-sm sm:text-[15px] text-center">Your cart is empty.</p>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-amber-50 py-8 md:py-14 text-stone-800">
-      <div className="max-w-6xl mx-auto px-4">
+    <main className="min-h-screen bg-amber-50 py-6 sm:py-8 md:py-14 text-stone-800">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Heading */}
-        <div className="text-center mb-8 md:mb-12">
-          <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#c89b3c] mb-2">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12">
+          <p className="text-[10px] sm:text-xs font-semibold tracking-[0.14em] sm:tracking-[0.18em] uppercase text-[#c89b3c] mb-2">
             Almost There
           </p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-stone-800 tracking-tight break-words">
             🧾 Checkout
           </h1>
-          <div className="w-12 h-0.5 bg-gradient-to-r from-[#c89b3c] to-[#d4a84b] mx-auto mt-4 rounded-full" />
+          <div className="w-10 sm:w-12 h-0.5 bg-gradient-to-r from-[#c89b3c] to-[#d4a84b] mx-auto mt-3 sm:mt-4 rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start">
+        {/* Switch to single column until large screens so tablets/small laptops
+            don't cram two dense panels side by side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 items-start">
 
           {/* ── LEFT — DELIVERY FORM ── */}
-          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-5 sm:p-6">
+          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-4 sm:p-5 md:p-6 w-full min-w-0">
 
-            <h2 className="text-xs font-semibold text-[#c89b3c] tracking-wide uppercase mb-6 flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-amber-100 text-[#c89b3c] flex items-center justify-center text-xs font-bold">1</span>
+            <h2 className="text-xs font-semibold text-[#c89b3c] tracking-wide uppercase mb-5 sm:mb-6 flex items-center gap-2">
+              <span className="w-5 h-5 shrink-0 rounded-full bg-amber-100 text-[#c89b3c] flex items-center justify-center text-xs font-bold">1</span>
               Delivery Details
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {[
-                ["fullName", "Full Name", "text", "col-span-2"],
-                ["phone", "Phone Number", "text", ""],
+                ["fullName", "Full Name", "text", "sm:col-span-2"],
+                ["phone", "Phone Number", "tel", ""],
                 ["house", "House / Flat No", "text", ""],
                 ["street", "Street", "text", ""],
                 ["area", "Area", "text", ""],
                 ["city", "City", "text", ""],
                 ["pincode", "Pincode", "text", ""],
                 ["deliveryDistance", "Distance from cafe (KM)", "number", ""],
-                ["landmark", "Landmark (optional)", "text", "col-span-2"],
+                ["landmark", "Landmark (optional)", "text", "sm:col-span-2"],
               ].map(([name, label, type, span]) => (
-                <div className={`flex flex-col gap-1 ${span}`} key={name}>
+                <div className={`flex flex-col gap-1 min-w-0 ${span}`} key={name}>
                   <label className="text-xs font-medium text-stone-500 tracking-wide">
                     {label}
                     {["fullName","phone","house","city","pincode","deliveryDistance"].includes(name) && (
@@ -200,7 +202,7 @@ export default function Checkout({ cartItems, clearCart }) {
                     name={name}
                     value={address[name]}
                     onChange={handleChange}
-                    className="w-full border border-stone-200 bg-stone-50 px-3 py-2.5 rounded-xl
+                    className="w-full min-w-0 border border-stone-200 bg-stone-50 px-3 py-2.5 rounded-xl
                     text-sm text-stone-800 placeholder:text-stone-300
                     focus:outline-none focus:ring-2 focus:ring-[#c89b3c]/40 focus:border-[#c89b3c]
                     transition-all duration-150"
@@ -246,18 +248,18 @@ export default function Checkout({ cartItems, clearCart }) {
             {/* Error */}
             {error && (
               <div className="mt-4 bg-red-50 border border-red-200 text-red-500 text-sm
-              px-4 py-3 rounded-xl">
+              px-4 py-3 rounded-xl break-words">
                 {error}
               </div>
             )}
           </div>
 
           {/* ── RIGHT — ORDER SUMMARY ── */}
-          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-5 sm:p-6 md:sticky md:top-24">
+          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-4 sm:p-5 md:p-6 w-full min-w-0 lg:sticky lg:top-24">
 
             <h2 className="text-xs font-semibold text-[#c89b3c] tracking-wide uppercase
-            mb-6 flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-amber-100 text-[#c89b3c] flex items-center
+            mb-5 sm:mb-6 flex items-center gap-2">
+              <span className="w-5 h-5 shrink-0 rounded-full bg-amber-100 text-[#c89b3c] flex items-center
               justify-center text-xs font-bold">2</span>
               Order Summary
             </h2>
@@ -265,12 +267,12 @@ export default function Checkout({ cartItems, clearCart }) {
             {/* Items list */}
             <div className="flex flex-col gap-2 mb-4">
               {cartItems.map((item) => (
-                <div key={item._id} className="flex justify-between items-center text-sm">
-                  <span className="text-stone-600 truncate max-w-[60%]">
+                <div key={item._id} className="flex justify-between items-center gap-3 text-sm">
+                  <span className="text-stone-600 truncate min-w-0 flex-1">
                     {item.name}
                     <span className="text-stone-400 ml-1">× {item.quantity}</span>
                   </span>
-                  <span className="font-semibold text-stone-700">₹{item.price * item.quantity}</span>
+                  <span className="font-semibold text-stone-700 shrink-0">₹{item.price * item.quantity}</span>
                 </div>
               ))}
             </div>
@@ -292,24 +294,24 @@ export default function Checkout({ cartItems, clearCart }) {
             </div>
 
             {/* ── DELIVERY FEE INFO ── */}
-            <div className="mt-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 flex flex-col gap-1">
+            <div className="mt-3 bg-blue-50 border border-blue-100 rounded-xl px-3 sm:px-4 py-3 flex flex-col gap-1">
               <p className="text-xs font-semibold text-blue-600 mb-1">🛵 Delivery Fee Info</p>
-              <div className="flex items-center justify-between text-xs text-blue-500">
+              <div className="flex items-center justify-between gap-2 text-xs text-blue-500">
                 <span>Within 5 km</span>
-                <span className="font-bold">₹20</span>
+                <span className="font-bold shrink-0">₹20</span>
               </div>
-              <div className="flex items-center justify-between text-xs text-blue-500">
+              <div className="flex items-center justify-between gap-2 text-xs text-blue-500">
                 <span>5 km – 10 km</span>
-                <span className="font-bold">₹40</span>
+                <span className="font-bold shrink-0">₹40</span>
               </div>
-              <div className="flex items-center justify-between text-xs text-red-400">
+              <div className="flex items-center justify-between gap-2 text-xs text-red-400">
                 <span>Above 10 km</span>
-                <span className="font-bold">Not available</span>
+                <span className="font-bold shrink-0">Not available</span>
               </div>
             </div>
 
             {/* COUPONS */}
-            <div className="bg-amber-50 border border-amber-100 rounded-xl mt-5 p-4">
+            <div className="bg-amber-50 border border-amber-100 rounded-xl mt-5 p-3 sm:p-4">
               <h3 className="text-xs font-semibold text-[#c89b3c] uppercase tracking-wide mb-3 flex items-center gap-1.5">
                 🎁 Available Coupons
               </h3>
@@ -324,10 +326,10 @@ export default function Checkout({ cartItems, clearCart }) {
                   {availableCoupons.map((coupon) => (
                     <div
                       key={coupon._id}
-                      className="flex justify-between items-center gap-3 bg-white border border-stone-100
+                      className="flex flex-wrap sm:flex-nowrap justify-between items-center gap-2 sm:gap-3 bg-white border border-stone-100
                       rounded-xl px-3 py-2.5"
                     >
-                      <div className="min-w-0">
+                      <div className="min-w-0 flex-1">
                         <p className="font-bold text-stone-800 text-sm tracking-wide truncate">{coupon.code}</p>
                         <p className="text-xs text-stone-400 mt-0.5">
                           {coupon.discountType === "percentage"
@@ -352,7 +354,7 @@ export default function Checkout({ cartItems, clearCart }) {
 
             {/* Coupon message */}
             {couponMessage && (
-              <p className={`text-sm mt-3 font-medium ${
+              <p className={`text-sm mt-3 font-medium break-words ${
                 couponMessage.includes("successfully") ? "text-green-600" : "text-red-400"
               }`}>
                 {couponMessage}
@@ -370,9 +372,9 @@ export default function Checkout({ cartItems, clearCart }) {
             <hr className="border-dashed border-stone-200 my-4" />
 
             {/* Final total */}
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center gap-2">
               <span className="text-stone-500 text-sm font-medium">Total Payable</span>
-              <span className="text-2xl font-bold text-green-600">₹{finalTotal}</span>
+              <span className="text-xl sm:text-2xl font-bold text-green-600">₹{finalTotal}</span>
             </div>
 
             <button
