@@ -98,52 +98,52 @@ export default function Menu({
     <main className="bg-amber-50 min-h-screen">
       <ToastContainer transition={Slide} position="top-center" />
 
-      <div className="w-full px-6 md:px-10 py-8">
+      <div className="w-full px-4 sm:px-6 md:px-10 py-8">
 
         {/* ── PAGE HEADING ── */}
-        <div className="relative flex items-center justify-center mb-6">
+        <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 mb-6">
 
           <div className="text-center">
             <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#c89b3c] mb-2">
               GJ 21 Cafe
             </p>
-            <h1 className="text-3xl md:text-4xl font-bold text-stone-800 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 tracking-tight">
               🍽️ Our Menu
             </h1>
             <div className="w-12 h-0.5 bg-gradient-to-r from-[#c89b3c] to-[#d4a84b] mx-auto mt-3 rounded-full" />
           </div>
 
-          {/* Fav + Cart — absolute right */}
+          {/* Fav + Cart — stacked/centered on mobile, absolute right on sm+ */}
           {!isAdmin && (
-            <div className="absolute right-0 flex items-center gap-4">
+            <div className="flex items-center justify-center gap-4 sm:absolute sm:right-0 sm:justify-start">
               <Link
                 to="/favorites"
                 className="flex items-center gap-2 text-rose-500 hover:text-rose-600 transition"
               >
-                <FaHeart className="text-2xl" />
-                <span className="font-bold text-base">{favorites?.length || 0}</span>
+                <FaHeart className="text-xl sm:text-2xl" />
+                <span className="font-bold text-sm sm:text-base">{favorites?.length || 0}</span>
               </Link>
               <Link
                 to="/cart"
                 className="flex items-center gap-2 text-[#c89b3c] hover:text-[#b88a2f] transition"
               >
-                <FaShoppingCart className="text-2xl" />
-                <span className="font-bold text-base">{totalCartCount}</span>
+                <FaShoppingCart className="text-xl sm:text-2xl" />
+                <span className="font-bold text-sm sm:text-base">{totalCartCount}</span>
               </Link>
             </div>
           )}
 
         </div>
 
-        {/* ── SEARCH + SORT — search left, sort far right ── */}
-        <div className="flex items-center justify-between gap-4 mb-6">
+        {/* ── SEARCH + SORT — stacks on mobile, side by side from sm up ── */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6">
 
           <input
             type="search"
             placeholder="Search items..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-[48%] px-4 py-2.5 border border-stone-200 bg-white rounded-xl text-sm
+            className="w-full sm:w-[48%] px-4 py-2.5 border border-stone-200 bg-white rounded-xl text-sm
             text-stone-800 placeholder:text-stone-400
             focus:outline-none focus:ring-2 focus:ring-[#c89b3c]/40 focus:border-[#c89b3c]
             transition-all duration-150"
@@ -152,9 +152,9 @@ export default function Menu({
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
-            className="px-4 py-2.5 border border-stone-200 bg-white rounded-xl text-sm
+            className="w-full sm:w-44 px-4 py-2.5 border border-stone-200 bg-white rounded-xl text-sm
             text-stone-600 focus:outline-none focus:ring-2 focus:ring-[#c89b3c]/40
-            focus:border-[#c89b3c] transition-all duration-150 w-44"
+            focus:border-[#c89b3c] transition-all duration-150"
           >
             <option value="">Sort By</option>
             <option value="low-high">Price: Low to High</option>
