@@ -142,17 +142,17 @@ export default function TrackOrder() {
   // ── LOADING ──
   if (loading)
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-3 bg-amber-50">
+      <div className="min-h-screen flex flex-col items-center justify-center gap-3 bg-amber-50 px-4">
         <div className="w-10 h-10 border-4 border-amber-200 border-t-[#c89b3c] rounded-full animate-spin" />
-        <p className="text-stone-400 text-sm">Loading order details…</p>
+        <p className="text-stone-400 text-sm text-center">Loading order details…</p>
       </div>
     );
 
   if (!order)
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-amber-50">
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-amber-50 px-4">
         <div className="text-5xl">❌</div>
-        <p className="text-stone-500 font-semibold">Order not found</p>
+        <p className="text-stone-500 font-semibold text-center">Order not found</p>
         <button
           onClick={() => navigate("/orders")}
           className="px-5 py-2 bg-[#c89b3c] text-white rounded-xl text-sm font-semibold"
@@ -212,41 +212,41 @@ export default function TrackOrder() {
   const msg = STATUS_MSG[trackingStatus] || STATUS_MSG.pending;
 
   return (
-    <main className="min-h-screen bg-amber-50 py-14 px-4">
+    <main className="min-h-screen bg-amber-50 py-8 sm:py-10 md:py-14 px-3 sm:px-4">
       <div className="max-w-2xl mx-auto">
 
         {/* ── PAGE HEADING ── */}
-        <div className="text-center mb-10">
-          <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#c89b3c] mb-2">
+        <div className="text-center mb-6 sm:mb-8 md:mb-10">
+          <p className="text-[10px] sm:text-xs font-semibold tracking-[0.14em] sm:tracking-[0.18em] uppercase text-[#c89b3c] mb-2">
             Live Updates
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-stone-800 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 tracking-tight break-words">
             🚚 Track Your Order
           </h1>
-          <div className="w-12 h-0.5 bg-gradient-to-r from-[#c89b3c] to-[#d4a84b] mx-auto mt-4 rounded-full" />
+          <div className="w-10 sm:w-12 h-0.5 bg-gradient-to-r from-[#c89b3c] to-[#d4a84b] mx-auto mt-3 sm:mt-4 rounded-full" />
         </div>
 
-        <div className="bg-white rounded-3xl border border-stone-100 shadow-lg overflow-hidden">
+        <div className="bg-white rounded-2xl sm:rounded-3xl border border-stone-100 shadow-lg overflow-hidden">
 
           {/* ── ORDER META BANNER ── */}
-          <div className="bg-gradient-to-br from-stone-50 to-amber-50 border-b border-stone-100 px-6 py-5
-          flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="bg-gradient-to-br from-stone-50 to-amber-50 border-b border-stone-100 px-4 sm:px-6 py-5
+          grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-4">
 
-            <div>
+            <div className="min-w-0">
               <p className="text-xs text-stone-400 font-medium mb-1">Order ID</p>
-              <p className="text-stone-800 font-bold tracking-wide font-mono">
+              <p className="text-stone-800 font-bold tracking-wide font-mono text-sm truncate">
                 #{order._id.slice(-6).toUpperCase()}
               </p>
             </div>
 
-            <div className="text-left sm:text-center">
+            <div className="min-w-0">
               <p className="text-xs text-stone-400 font-medium mb-1">Status</p>
               <span className={`inline-flex items-center gap-1.5 text-white text-xs font-bold px-3 py-1 rounded-full capitalize ${meta.color}`}>
                 <span>{meta.icon}</span>
-                <span>{order.status.replaceAll("_", " ")}</span>
+                <span className="truncate">{order.status.replaceAll("_", " ")}</span>
               </span>
             </div>
-            <div className="text-left sm:text-center">
+            <div className="min-w-0">
               <p className="text-xs text-stone-400 font-medium mb-1">
                 Delivery Status
               </p>
@@ -254,11 +254,11 @@ export default function TrackOrder() {
               <span
                 className="inline-flex items-center gap-1.5 text-white text-xs font-bold px-3 py-1 rounded-full bg-indigo-500 capitalize"
               >
-                {(order.deliveryStatus || "not assigned").replaceAll("_", " ")}
+                <span className="truncate">{(order.deliveryStatus || "not assigned").replaceAll("_", " ")}</span>
               </span>
             </div>
 
-            <div className="text-left sm:text-right">
+            <div className="min-w-0 sm:text-right">
               <p className="text-xs text-stone-400 font-medium mb-1">⏱ Est. Delivery</p>
               <p className="text-[#c89b3c] font-bold text-sm">
                 {order.estimatedDeliveryTime
@@ -270,7 +270,7 @@ export default function TrackOrder() {
             </div>
           </div>
 
-          <div className="px-6 py-7 flex flex-col gap-6">
+          <div className="px-4 sm:px-6 py-6 sm:py-7 flex flex-col gap-5 sm:gap-6">
 
             {/* ── CANCELLED STATE ── */}
             {isCancelled ? (
@@ -281,12 +281,12 @@ export default function TrackOrder() {
                 </div>
 
                 {cancelledByAdmin ? (
-                  <div className="w-full bg-red-50 border border-red-200 rounded-2xl px-5 py-4 text-center">
+                  <div className="w-full bg-red-50 border border-red-200 rounded-2xl px-4 sm:px-5 py-4 text-center">
                     <p className="text-[10px] font-bold text-red-400 uppercase tracking-widest mb-1">
                       🏪 Cancelled by Restaurant
                     </p>
                     {cancelReason ? (
-                      <p className="text-sm text-red-700 font-medium leading-relaxed">
+                      <p className="text-sm text-red-700 font-medium leading-relaxed break-words">
                         "{cancelReason}"
                       </p>
                     ) : (
@@ -294,7 +294,7 @@ export default function TrackOrder() {
                     )}
                   </div>
                 ) : (
-                  <div className="w-full bg-stone-50 border border-stone-200 rounded-2xl px-5 py-4 text-center">
+                  <div className="w-full bg-stone-50 border border-stone-200 rounded-2xl px-4 sm:px-5 py-4 text-center">
                     <p className="text-sm font-semibold text-stone-600">You cancelled this order.</p>
                   </div>
                 )}
@@ -310,53 +310,57 @@ export default function TrackOrder() {
 
             ) : (
               <>
-                {/* ── PROGRESS TRACKER ── */}
-                <div className="relative flex justify-between items-start">
+                {/* ── PROGRESS TRACKER ──
+                    Scrolls horizontally on narrow screens instead of squeezing
+                    7 steps into a viewport that can't fit them. */}
+                <div className="-mx-4 sm:mx-0 px-4 sm:px-0 overflow-x-auto pb-1">
+                  <div className="relative flex justify-between items-start min-w-[560px] sm:min-w-0">
 
-                  {/* BG line */}
-                  <div className="absolute top-5 left-0 w-full h-1 bg-stone-100 z-0 rounded-full" />
+                    {/* BG line */}
+                    <div className="absolute top-5 left-0 w-full h-1 bg-stone-100 z-0 rounded-full" />
 
-                  {/* Progress fill */}
-                  <div
-                    className="absolute top-5 left-0 h-1 bg-green-400 z-0 rounded-full transition-all duration-700"
-                    style={{ width: `${progressPct}%` }}
-                  />
+                    {/* Progress fill */}
+                    <div
+                      className="absolute top-5 left-0 h-1 bg-green-400 z-0 rounded-full transition-all duration-700"
+                      style={{ width: `${progressPct}%` }}
+                    />
 
-                  {STATUS_STEPS.map((step, index) => {
-                    const m = STEP_META[step];
-                    const isDone = index < currentStep;
-                    const isNow = index === currentStep;
-                    return (
-                      <div key={step} className="relative z-10 flex flex-col items-center flex-1 gap-2">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg
-                          shadow-sm transition-all duration-300 border-2
-                          ${isDone
-                            ? "bg-green-500 border-green-400 text-white"
-                            : isNow
-                              ? `${m.color} border-transparent text-white scale-110 shadow-md ring-4 ${m.ring}`
-                              : "bg-white border-stone-200 text-stone-300"
-                          }`}
-                        >
-                          {isDone ? "✓" : m.icon}
+                    {STATUS_STEPS.map((step, index) => {
+                      const m = STEP_META[step];
+                      const isDone = index < currentStep;
+                      const isNow = index === currentStep;
+                      return (
+                        <div key={step} className="relative z-10 flex flex-col items-center flex-1 gap-2 px-0.5">
+                          <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-base sm:text-lg
+                            shadow-sm transition-all duration-300 border-2 shrink-0
+                            ${isDone
+                              ? "bg-green-500 border-green-400 text-white"
+                              : isNow
+                                ? `${m.color} border-transparent text-white scale-110 shadow-md ring-4 ${m.ring}`
+                                : "bg-white border-stone-200 text-stone-300"
+                            }`}
+                          >
+                            {isDone ? "✓" : m.icon}
+                          </div>
+                          <p className={`text-[9px] sm:text-[10px] md:text-xs font-semibold capitalize text-center leading-tight transition-all
+                            ${isDone ? "text-green-600" : isNow ? "text-stone-800" : "text-stone-300"}`}
+                          >
+                            {m.label}
+                          </p>
                         </div>
-                        <p className={`text-[10px] md:text-xs font-semibold capitalize text-center leading-tight transition-all
-                          ${isDone ? "text-green-600" : isNow ? "text-stone-800" : "text-stone-300"}`}
-                        >
-                          {m.label}
-                        </p>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {/* ── STATUS MESSAGE ── */}
-                <div className={`flex items-start gap-3 rounded-2xl px-5 py-4 border
+                <div className={`flex items-start gap-3 rounded-2xl px-4 sm:px-5 py-4 border
                   ${isDelivered
                     ? "bg-green-50 border-green-100"
                     : "bg-amber-50 border-amber-100"
                   }`}>
                   <span className="text-2xl shrink-0">{meta.icon}</span>
-                  <div>
+                  <div className="min-w-0">
                     <p className="font-bold text-stone-800 text-sm mb-0.5">{msg.title}</p>
                     <p className="text-xs text-stone-500 leading-relaxed">{msg.sub}</p>
                   </div>
@@ -364,23 +368,23 @@ export default function TrackOrder() {
 
                 {/* ── DELIVERY PARTNER CARD ── */}
                 {partner && (
-                  <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-5 py-4">
+                  <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-4 sm:px-5 py-4">
                     <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-3">
                       🛵 Your Delivery Partner
                     </p>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3 sm:gap-4">
                       {/* Avatar */}
-                      <div className="w-12 h-12 rounded-xl bg-indigo-100 border border-indigo-200
+                      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-indigo-100 border border-indigo-200
                       flex items-center justify-center text-xl font-black text-indigo-500 shrink-0">
                         {(partner.name || "D")[0].toUpperCase()}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-bold text-stone-800 text-sm">{partner.name || "Partner"}</p>
+                        <p className="font-bold text-stone-800 text-sm truncate">{partner.name || "Partner"}</p>
                         {(partner.phone || partner.mobile) && (
                           <a
                             href={`tel:${partner.phone || partner.mobile}`}
                             className="inline-flex items-center gap-1.5 mt-1 text-xs font-semibold
-                            text-indigo-600 hover:text-indigo-800 transition-colors"
+                            text-indigo-600 hover:text-indigo-800 transition-colors truncate"
                           >
                             📞 {partner.phone || partner.mobile}
                           </a>
@@ -404,18 +408,18 @@ export default function TrackOrder() {
             )}
 
             {/* ── ORDER ITEMS ── */}
-            <div className="bg-stone-50 border border-stone-100 rounded-2xl px-5 py-4">
+            <div className="bg-stone-50 border border-stone-100 rounded-2xl px-4 sm:px-5 py-4">
               <h3 className="text-xs font-semibold text-stone-400 uppercase tracking-widest mb-4">
                 🧾 Order Items
               </h3>
               <div className="flex flex-col gap-2">
                 {order.items.map((item, i) => (
-                  <div key={item._id || i} className="flex justify-between items-center text-sm">
-                    <span className="text-stone-600">
+                  <div key={item._id || i} className="flex justify-between items-center gap-3 text-sm">
+                    <span className="text-stone-600 min-w-0 truncate flex-1">
                       {item.menuItem?.name || item.name || `Item ${i + 1}`}
                       <span className="text-stone-400 ml-1">× {item.quantity}</span>
                     </span>
-                    <span className="font-semibold text-stone-800">
+                    <span className="font-semibold text-stone-800 shrink-0">
                       ₹{(item.menuItem?.price || item.price || 0) * item.quantity}
                     </span>
                   </div>
@@ -424,7 +428,7 @@ export default function TrackOrder() {
             </div>
 
             {/* ── BILL DETAILS ── */}
-            <div className="bg-stone-50 border border-stone-100 rounded-2xl px-5 py-4">
+            <div className="bg-stone-50 border border-stone-100 rounded-2xl px-4 sm:px-5 py-4">
               <h3 className="text-xs font-semibold text-stone-400 uppercase tracking-widest mb-4">
                 💰 Bill Details
               </h3>
@@ -438,22 +442,22 @@ export default function TrackOrder() {
                   <span>₹{order.deliveryFee || 0}</span>
                 </div>
                 {order.discount > 0 && (
-                  <div className="flex justify-between text-green-600 font-medium">
-                    <span>Discount {order.couponCode && `(${order.couponCode})`}</span>
-                    <span>− ₹{order.discount}</span>
+                  <div className="flex justify-between gap-2 text-green-600 font-medium">
+                    <span className="min-w-0 truncate">Discount {order.couponCode && `(${order.couponCode})`}</span>
+                    <span className="shrink-0">− ₹{order.discount}</span>
                   </div>
                 )}
                 <hr className="border-dashed border-stone-200 my-1" />
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center gap-2">
                   <span className="font-semibold text-stone-700">Total Paid</span>
-                  <span className="text-green-600 font-bold text-lg">
+                  <span className="text-green-600 font-bold text-base sm:text-lg">
                     ₹{order.finalTotal || order.totalPrice || 0}
                   </span>
                 </div>
                 {/* Payment method */}
-                <div className="flex justify-between items-center pt-1">
-                  <span className="text-xs text-stone-400">Payment</span>
-                  <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full capitalize
+                <div className="flex justify-between items-center gap-2 pt-1">
+                  <span className="text-xs text-stone-400 shrink-0">Payment</span>
+                  <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full capitalize truncate
                     ${order.paymentStatus === "paid"
                       ? "bg-green-100 text-green-700"
                       : "bg-yellow-100 text-yellow-700"}`}>
@@ -465,8 +469,8 @@ export default function TrackOrder() {
 
             {/* ── LIVE REFRESH INDICATOR ── */}
             {!isCancelled && (
-              <div className="flex items-center justify-center gap-2 text-xs text-stone-400">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <div className="flex items-center justify-center gap-2 text-xs text-stone-400 text-center">
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
                 Auto-refreshing every 5 seconds
               </div>
             )}
