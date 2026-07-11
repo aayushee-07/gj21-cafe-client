@@ -152,24 +152,24 @@ export default function Checkout({ cartItems, clearCart }) {
   }
 
   return (
-    <main className="min-h-screen bg-amber-50 py-14 text-stone-800">
+    <main className="min-h-screen bg-amber-50 py-8 md:py-14 text-stone-800">
       <div className="max-w-6xl mx-auto px-4">
 
         {/* Heading */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[#c89b3c] mb-2">
             Almost There
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-stone-800 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 tracking-tight">
             🧾 Checkout
           </h1>
           <div className="w-12 h-0.5 bg-gradient-to-r from-[#c89b3c] to-[#d4a84b] mx-auto mt-4 rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start">
 
           {/* ── LEFT — DELIVERY FORM ── */}
-          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-6">
+          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-5 sm:p-6">
 
             <h2 className="text-xs font-semibold text-[#c89b3c] tracking-wide uppercase mb-6 flex items-center gap-2">
               <span className="w-5 h-5 rounded-full bg-amber-100 text-[#c89b3c] flex items-center justify-center text-xs font-bold">1</span>
@@ -253,7 +253,7 @@ export default function Checkout({ cartItems, clearCart }) {
           </div>
 
           {/* ── RIGHT — ORDER SUMMARY ── */}
-          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-6 md:sticky md:top-24">
+          <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-5 sm:p-6 md:sticky md:top-24">
 
             <h2 className="text-xs font-semibold text-[#c89b3c] tracking-wide uppercase
             mb-6 flex items-center gap-2">
@@ -324,11 +324,11 @@ export default function Checkout({ cartItems, clearCart }) {
                   {availableCoupons.map((coupon) => (
                     <div
                       key={coupon._id}
-                      className="flex justify-between items-center bg-white border border-stone-100
+                      className="flex justify-between items-center gap-3 bg-white border border-stone-100
                       rounded-xl px-3 py-2.5"
                     >
-                      <div>
-                        <p className="font-bold text-stone-800 text-sm tracking-wide">{coupon.code}</p>
+                      <div className="min-w-0">
+                        <p className="font-bold text-stone-800 text-sm tracking-wide truncate">{coupon.code}</p>
                         <p className="text-xs text-stone-400 mt-0.5">
                           {coupon.discountType === "percentage"
                             ? `${coupon.discountValue}% off`
@@ -338,7 +338,7 @@ export default function Checkout({ cartItems, clearCart }) {
 
                       <button
                         onClick={() => applyCoupon(coupon.code)}
-                        className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5
+                        className="flex-shrink-0 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5
                         rounded-lg text-xs font-semibold transition-all duration-150
                         shadow-sm shadow-green-200 hover:-translate-y-0.5 active:translate-y-0"
                       >
