@@ -31,7 +31,6 @@ function Home() {
         className="hero-orb delay-400 absolute -bottom-24 -right-24 w-[360px] h-[360px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(200,155,60,0.09) 0%, transparent 70%)" }}
       />
-      {/* Fine grain overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
@@ -41,9 +40,7 @@ function Home() {
           backgroundSize: "128px",
         }}
       />
-      {/* Warm top gradient */}
       <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#c89b3c]/8 to-transparent pointer-events-none" />
-      {/* Bottom vignette */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
 
       {/* ── MAIN CONTENT ── */}
@@ -52,7 +49,6 @@ function Home() {
         {/* ── LEFT TEXT ── */}
         <div className="flex flex-col gap-4 sm:gap-6 z-10">
 
-          {/* Eyebrow badge */}
           <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center gap-2 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 text-[#c89b3c]/90 px-3.5 sm:px-4 py-2 rounded-full text-[10px] sm:text-xs font-semibold tracking-[0.14em] sm:tracking-[0.18em] uppercase backdrop-blur-sm">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c89b3c] opacity-75" />
@@ -61,7 +57,6 @@ function Home() {
             <span>Now Open · 2 PM – 2 AM</span>
           </div>
 
-          {/* Heading */}
           <div className="hero-fade-up delay-200 flex flex-col gap-1">
             <p className="text-white/40 text-xs sm:text-base font-medium tracking-[0.08em] uppercase">
               Welcome to
@@ -72,19 +67,16 @@ function Home() {
             </h1>
           </div>
 
-          {/* Divider */}
           <div className="hero-fade-up delay-200 flex items-center gap-3">
             <div className="w-10 h-[2px] bg-gradient-to-r from-[#c89b3c] to-[#c89b3c]/20 rounded-full" />
             <div className="w-2 h-[2px] bg-[#c89b3c]/20 rounded-full" />
           </div>
 
-          {/* Subtitle */}
           <p className="hero-fade-up delay-300 text-white/55 text-sm leading-[1.75] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
             Where every sip tells a story ☕✨<br />
             Experience the perfect blend of taste, comfort, and vibes.
           </p>
 
-          {/* Buttons */}
           <div className="hero-fade-up delay-400 flex flex-col xs:flex-row gap-3">
             <Link
               to="/menu"
@@ -104,7 +96,6 @@ function Home() {
             </Link>
           </div>
 
-          {/* Stats */}
           <div className="hero-fade-up delay-500 grid grid-cols-3 gap-2 sm:flex sm:items-stretch sm:gap-0 pt-1">
             {stats.map(({ num, label, icon }, idx) => (
               <div key={label} className="flex items-center">
@@ -128,7 +119,6 @@ function Home() {
         {/* ── RIGHT LOGO ── */}
         <div className="hero-fade-in delay-300 flex items-center justify-center md:justify-end z-10 pt-2 pb-4 md:py-0">
           <div className="hero-float relative">
-            {/* Glow ring behind the logo */}
             <div
               className="absolute inset-0 rounded-full pointer-events-none"
               style={{
