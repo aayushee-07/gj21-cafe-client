@@ -20,7 +20,7 @@ const marqueeItems = [
 
 function Home() {
   return (
-    <section className="relative bg-[#0A0A0A] text-white min-h-[calc(100vh-73px)] lg:h-[calc(100vh-73px)] flex flex-col justify-between overflow-hidden">
+    <section className="relative bg-[#150d0a] text-white min-h-[calc(100vh-73px)] lg:h-[calc(100vh-73px)] flex flex-col justify-between overflow-hidden">
 
       {/* ── MAIN CONTENT ── */}
       <div className="relative flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 py-10 sm:py-12 md:py-14 lg:py-0 w-full grid md:grid-cols-2 items-center gap-10 md:gap-8 lg:gap-16">
@@ -59,10 +59,10 @@ function Home() {
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-nowrap gap-3">
+          <div className="flex gap-3">
             <Link
               to="/menu"
-              className="group relative text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] text-white font-bold px-7 py-3.5 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300"
+              className="group relative w-[150px] text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] text-white font-bold px-6 py-3.5 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Order Now
@@ -72,7 +72,7 @@ function Home() {
 
             <Link
               to="/about"
-              className="text-center border border-white/15 hover:border-white/30 text-white/65 hover:text-white px-7 py-3.5 sm:py-3 rounded-2xl text-sm hover:bg-white/[0.06] tracking-wide transition-all duration-300"
+              className="w-[150px] text-center border border-white/15 hover:border-white/30 text-white/65 hover:text-white px-6 py-3.5 sm:py-3 rounded-2xl text-sm hover:bg-white/[0.06] tracking-wide transition-all duration-300"
             >
               About Us
             </Link>
@@ -100,11 +100,18 @@ function Home() {
         </div>
 
         {/* ── RIGHT LOGO ── */}
-        <div className="flex items-center justify-center md:justify-end z-10 pt-4 pb-6 md:py-0">
+        <div className="relative flex items-center justify-center md:justify-end z-10 pt-4 pb-6 md:py-0">
+          {/* Subtle radial highlight behind the logo only */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle at center, rgba(200,155,60,0.12) 0%, transparent 65%)",
+            }}
+          />
           <img
             src={cafeImage}
             alt="GJ 21 Cafe Logo"
-            className="w-52 sm:w-72 md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain mix-blend-screen"
+            className="relative w-60 sm:w-80 md:w-[420px] lg:w-[500px] xl:w-[560px] max-w-full h-auto object-contain mix-blend-screen"
           />
         </div>
       </div>
