@@ -3,8 +3,8 @@ import cafeImage from "/cafelogo1.png";
 
 const stats = [
   { num: "4.6+", label: "Star Rating", icon: "⭐" },
-  { num: "2+",   label: "Years Open",  icon: "🏆" },
-  { num: "50+",  label: "Menu Items",  icon: "🍽️" },
+  { num: "2+", label: "Years Open", icon: "🏆" },
+  { num: "50+", label: "Menu Items", icon: "🍽️" },
 ];
 
 const marqueeItems = [
@@ -20,140 +20,84 @@ const marqueeItems = [
 
 function Home() {
   return (
-    <section className="relative bg-[#120a08] text-white min-h-[calc(100vh-73px)] lg:h-[calc(100vh-73px)] flex flex-col justify-between overflow-hidden">
+    <section className="relative flex min-h-[calc(100vh-73px)] flex-col justify-between overflow-hidden bg-[#24110d] text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.025)_0%,rgba(0,0,0,0)_42%),linear-gradient(to_bottom,rgba(255,255,255,0.02),transparent_15%,transparent_85%,rgba(0,0,0,0.22))]" />
 
-      {/* ── DECORATIVE BACKGROUND ORBS ── */}
-      <div
-        className="hero-orb absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(200,155,60,0.13) 0%, transparent 70%)" }}
-      />
-      <div
-        className="hero-orb delay-400 absolute -bottom-24 -right-24 w-[360px] h-[360px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(200,155,60,0.09) 0%, transparent 70%)" }}
-      />
-      {/* Fine grain overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
-          backgroundRepeat: "repeat",
-          backgroundSize: "128px",
-        }}
-      />
-      {/* Warm top gradient */}
-      <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#c89b3c]/8 to-transparent pointer-events-none" />
-      {/* Bottom vignette */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
-
-      {/* ── MAIN CONTENT ── */}
-      <div className="relative flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 py-10 sm:py-12 md:py-14 lg:py-0 w-full grid md:grid-cols-2 items-center gap-10 md:gap-8 lg:gap-16">
-
-        {/* ── LEFT TEXT ── */}
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 grid-cols-1 items-center gap-10 px-5 py-10 sm:px-8 md:px-12 lg:grid lg:grid-cols-[45%_55%] lg:px-14 lg:py-0">
         <div className="flex flex-col gap-5 sm:gap-6 z-10">
-
-          {/* Eyebrow badge */}
-          <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center gap-2.5 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 text-[#c89b3c]/90 px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm">
+          <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-[#c89b3c]/20 bg-[#c89b3c]/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#c89b3c]/90 backdrop-blur-sm sm:text-xs">
             <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c89b3c] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c89b3c]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#c89b3c] opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#c89b3c]" />
             </span>
             <span>Now Open · 2 PM – 2 AM</span>
           </div>
 
-          {/* Heading */}
-          <div className="hero-fade-up delay-200 flex flex-col gap-1">
-            <p className="text-white/40 text-sm sm:text-base font-medium tracking-[0.08em] uppercase">
+          <div className="flex flex-col gap-1">
+            <p className="text-[18px] font-medium tracking-[0.03em] text-white/55 sm:text-[19px]">
               Welcome to
             </p>
-            <h1 className="text-4xl sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.05] tracking-tight">
-              <span className="text-shimmer">GJ 21</span>
-              <span className="text-white"> Cafe</span>
+            <h1 className="max-w-[620px] text-[46px] font-extrabold leading-[0.94] tracking-[-0.05em] sm:text-[60px] md:text-[72px] lg:text-[90px]">
+              <span className="text-[#d0a33a]">GJ 21</span>{" "}
+              <span className="text-white">Cafe</span>
             </h1>
           </div>
 
-          {/* Divider */}
-          <div className="hero-fade-up delay-200 flex items-center gap-3">
-            <div className="w-10 h-[2px] bg-gradient-to-r from-[#c89b3c] to-[#c89b3c]/20 rounded-full" />
-            <div className="w-2 h-[2px] bg-[#c89b3c]/20 rounded-full" />
-          </div>
+          <div className="h-[2px] w-14 bg-[#b58a2f]" />
 
-          {/* Subtitle */}
-          <p className="hero-fade-up delay-300 text-white/55 text-sm sm:text-[15px] leading-[1.85] max-w-[300px] sm:max-w-[420px]">
-            Where every sip tells a story ☕✨<br />
-            Experience the perfect blend of taste, comfort, and vibes.
+          <p className="max-w-[430px] text-[19px] leading-[1.6] text-white/55 sm:text-[21px]">
+            Where every sip tells a story ☕ ✨
+            <br />
+            Experience the perfect blend of taste,
+            <br />
+            comfort, and vibes.
           </p>
 
-          {/* Buttons */}
-          <div className="hero-fade-up delay-400 flex flex-wrap gap-3">
+          <div className="flex flex-nowrap gap-3">
             <Link
               to="/menu"
-              className="group relative text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] text-white font-bold px-7 py-3.5 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(200,155,60,0.45)] active:translate-y-0"
+              className="inline-flex h-[56px] w-[168px] items-center justify-center rounded-[14px] bg-[#d0a33a] text-[18px] font-bold text-white shadow-[0_12px_28px_rgba(0,0,0,0.18)] transition hover:bg-[#bd912a]"
             >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                Order Now
-                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </span>
+              Order Now →
             </Link>
-
             <Link
               to="/about"
-              className="text-center border border-white/15 hover:border-[#c89b3c]/40 text-white/65 hover:text-white px-7 py-3.5 sm:py-3 rounded-2xl text-sm hover:bg-white/[0.06] tracking-wide transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+              className="inline-flex h-[56px] w-[136px] items-center justify-center rounded-[14px] border border-white/12 text-[18px] font-medium text-white/70 transition hover:bg-white/5 hover:text-white"
             >
               About Us
             </Link>
           </div>
 
-          {/* Stats */}
-          <div className="hero-fade-up delay-500 flex flex-wrap items-stretch gap-y-3 gap-x-0 pt-1">
-            {stats.map(({ num, label, icon }, idx) => (
-              <div key={label} className="flex items-center">
-                <div className="flex flex-col gap-0.5 px-4 sm:px-5 first:pl-0 min-w-0">
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl sm:text-2xl font-extrabold text-[#c89b3c] leading-none">{num}</span>
-                    <span className="text-base leading-none">{icon}</span>
+          <div className="mt-2 flex items-start">
+            {stats.map((item, idx) => (
+              <div key={item.label} className="flex items-start">
+                <div className="pr-8 sm:pr-10">
+                  <div className="text-[28px] font-extrabold leading-none tracking-[-0.04em] text-[#d0a33a]">
+                    {item.num}
                   </div>
-                  <p className="text-[10px] sm:text-[11px] text-white/35 font-medium tracking-widest uppercase whitespace-nowrap mt-1">
-                    {label}
-                  </p>
+                  <div className="mt-2 text-[15px] font-medium text-white/42">
+                    {item.label}
+                  </div>
                 </div>
-                {idx < stats.length - 1 && (
-                  <div className="w-px h-8 bg-white/10 self-center mx-0" />
-                )}
+                {idx < stats.length - 1 && <div className="mr-8 h-10 w-px bg-white/10 sm:mr-10" />}
               </div>
             ))}
           </div>
         </div>
 
-        {/* ── RIGHT LOGO ── */}
-        <div className="hero-fade-in delay-300 flex items-center justify-center md:justify-end z-10 pt-4 pb-6 md:py-0">
-          <div className="hero-float relative">
-            {/* Glow ring behind the logo */}
-            <div
-              className="absolute inset-0 rounded-full pointer-events-none"
-              style={{
-                background: "radial-gradient(circle, rgba(200,155,60,0.18) 0%, transparent 68%)",
-                transform: "scale(1.15)",
-              }}
-            />
-            <img
-              src={cafeImage}
-              alt="GJ 21 Cafe Logo"
-              className="relative w-52 sm:w-72 md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain mix-blend-screen"
-              style={{ filter: "contrast(1.08) drop-shadow(0 0 48px rgba(200,155,60,0.25))" }}
-            />
-          </div>
+        <div className="relative flex items-center justify-center lg:justify-end">
+          <img
+            src={cafeImage}
+            alt="GJ 21 Cafe Logo"
+            className="relative w-[420px] max-w-full object-contain sm:w-[520px] md:w-[620px] lg:w-[760px] xl:w-[820px]"
+          />
         </div>
       </div>
 
-      {/* ── BOTTOM MARQUEE ── */}
-      <div className="relative border-t border-white/[0.07] bg-white/[0.03] py-3 overflow-hidden flex-shrink-0 z-10">
-        <div className="flex gap-10 sm:gap-14 animate-marquee whitespace-nowrap w-max">
-          {[...marqueeItems, ...marqueeItems].map((item, i) => (
-            <span
-              key={i}
-              className="text-white/50 text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase"
-            >
+      <div className="relative border-t border-white/10 bg-[#24110d]">
+        <div className="mx-auto flex max-w-7xl items-center gap-8 overflow-x-auto px-4 py-3 text-[14px] font-semibold tracking-[0.08em] text-white/68 sm:px-6 lg:px-8">
+          {marqueeItems.map((item) => (
+            <span key={item} className="whitespace-nowrap">
               {item}
             </span>
           ))}
