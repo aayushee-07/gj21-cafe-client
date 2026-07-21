@@ -47,26 +47,26 @@ function Home() {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
 
       {/* ── MAIN CONTENT ── */}
-      <div className="relative flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 py-10 sm:py-12 md:py-14 lg:py-0 w-full grid md:grid-cols-2 items-center gap-10 md:gap-8 lg:gap-16">
+      <div className="relative flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 py-8 sm:py-12 md:py-14 lg:py-0 w-full grid md:grid-cols-2 items-center gap-8 sm:gap-10 md:gap-8 lg:gap-16">
 
         {/* ── LEFT TEXT ── */}
-        <div className="flex flex-col gap-5 sm:gap-6 z-10">
+        <div className="flex flex-col gap-4 sm:gap-6 z-10">
 
           {/* Eyebrow badge */}
-          <div className="hero-fade-up delay-100 inline-flex items-center gap-2.5 w-fit bg-[#c89b3c]/10 border border-[#c89b3c]/20 text-[#c89b3c]/90 px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
+          <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center gap-2 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 text-[#c89b3c]/90 px-3.5 sm:px-4 py-2 rounded-full text-[10px] sm:text-xs font-semibold tracking-[0.14em] sm:tracking-[0.18em] uppercase backdrop-blur-sm">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c89b3c] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c89b3c]" />
             </span>
-            Now Open &nbsp;·&nbsp; 2 PM – 2 AM
+            <span>Now Open · 2 PM – 2 AM</span>
           </div>
 
           {/* Heading */}
           <div className="hero-fade-up delay-200 flex flex-col gap-1">
-            <p className="text-white/40 text-sm sm:text-base font-medium tracking-[0.08em] uppercase">
+            <p className="text-white/40 text-xs sm:text-base font-medium tracking-[0.08em] uppercase">
               Welcome to
             </p>
-            <h1 className="text-4xl sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.05] tracking-tight">
+            <h1 className="text-[34px] xs:text-4xl sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.05] tracking-tight">
               <span className="text-shimmer">GJ 21</span>
               <span className="text-white"> Cafe</span>
             </h1>
@@ -79,16 +79,16 @@ function Home() {
           </div>
 
           {/* Subtitle */}
-          <p className="hero-fade-up delay-300 text-white/55 text-sm sm:text-[15px] leading-[1.85] max-w-[340px] sm:max-w-[420px]">
+          <p className="hero-fade-up delay-300 text-white/55 text-sm leading-[1.75] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
             Where every sip tells a story ☕✨<br />
             Experience the perfect blend of taste, comfort, and vibes.
           </p>
 
           {/* Buttons */}
-          <div className="hero-fade-up delay-400 flex flex-wrap sm:flex-nowrap gap-3">
+          <div className="hero-fade-up delay-400 flex flex-col xs:flex-row gap-3">
             <Link
               to="/menu"
-              className="group relative w-full sm:w-auto text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] text-white font-bold px-7 py-3.5 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(200,155,60,0.45)] active:translate-y-0"
+              className="group relative w-full xs:w-auto text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] text-white font-bold px-7 py-3.5 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(200,155,60,0.45)] active:translate-y-0"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Order Now
@@ -98,27 +98,27 @@ function Home() {
 
             <Link
               to="/about"
-              className="w-full sm:w-auto text-center border border-white/15 hover:border-[#c89b3c]/40 text-white/65 hover:text-white px-7 py-3.5 sm:py-3 rounded-2xl text-sm hover:bg-white/[0.06] tracking-wide transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+              className="w-full xs:w-auto text-center border border-white/15 hover:border-[#c89b3c]/40 text-white/65 hover:text-white px-7 py-3.5 sm:py-3 rounded-2xl text-sm hover:bg-white/[0.06] tracking-wide transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
             >
               About Us
             </Link>
           </div>
 
           {/* Stats */}
-          <div className="hero-fade-up delay-500 flex items-stretch gap-0 pt-1">
+          <div className="hero-fade-up delay-500 grid grid-cols-3 gap-2 sm:flex sm:items-stretch sm:gap-0 pt-1">
             {stats.map(({ num, label, icon }, idx) => (
               <div key={label} className="flex items-center">
-                <div className="flex flex-col gap-0.5 px-4 sm:px-5 first:pl-0">
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl sm:text-2xl font-extrabold text-[#c89b3c] leading-none">{num}</span>
-                    <span className="text-base leading-none">{icon}</span>
+                <div className="flex flex-col gap-0.5 sm:px-5 sm:first:pl-0 min-w-0">
+                  <div className="flex items-baseline gap-1 sm:gap-1.5">
+                    <span className="text-lg sm:text-2xl font-extrabold text-[#c89b3c] leading-none">{num}</span>
+                    <span className="text-sm sm:text-base leading-none">{icon}</span>
                   </div>
-                  <p className="text-[10px] sm:text-[11px] text-white/35 font-medium tracking-widest uppercase whitespace-nowrap mt-1">
+                  <p className="text-[9px] sm:text-[11px] text-white/35 font-medium tracking-tight sm:tracking-widest uppercase truncate mt-1">
                     {label}
                   </p>
                 </div>
                 {idx < stats.length - 1 && (
-                  <div className="w-px h-8 bg-white/10 self-center mx-0" />
+                  <div className="hidden sm:block w-px h-8 bg-white/10 self-center mx-0" />
                 )}
               </div>
             ))}
@@ -126,7 +126,7 @@ function Home() {
         </div>
 
         {/* ── RIGHT LOGO ── */}
-        <div className="hero-fade-in delay-300 flex items-center justify-center md:justify-end z-10 pt-4 pb-6 md:py-0">
+        <div className="hero-fade-in delay-300 flex items-center justify-center md:justify-end z-10 pt-2 pb-4 md:py-0">
           <div className="hero-float relative">
             {/* Glow ring behind the logo */}
             <div
@@ -139,7 +139,7 @@ function Home() {
             <img
               src={cafeImage}
               alt="GJ 21 Cafe Logo"
-              className="relative w-52 sm:w-72 md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain mix-blend-screen"
+              className="relative w-36 xs:w-44 sm:w-64 md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain mix-blend-screen"
               style={{ filter: "contrast(1.08) drop-shadow(0 0 48px rgba(200,155,60,0.25))" }}
             />
           </div>
@@ -147,12 +147,12 @@ function Home() {
       </div>
 
       {/* ── BOTTOM MARQUEE ── */}
-      <div className="relative border-t border-white/[0.07] bg-white/[0.03] py-3 overflow-hidden flex-shrink-0 z-10">
-        <div className="flex gap-10 sm:gap-14 animate-marquee whitespace-nowrap w-max">
+      <div className="relative border-t border-white/[0.07] bg-white/[0.03] py-2.5 sm:py-3 overflow-hidden flex-shrink-0 z-10">
+        <div className="flex gap-8 sm:gap-14 animate-marquee whitespace-nowrap w-max">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span
               key={i}
-              className="text-white/50 text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase"
+              className="text-white/50 text-[9px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase"
             >
               {item}
             </span>
