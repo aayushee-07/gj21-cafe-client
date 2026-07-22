@@ -23,7 +23,7 @@ export default function Menu({
   =============================== */
   const fetchMenu = () => {
     axios
-      .get("http://localhost:5001/api/menu")
+    api.get("/menu")
       .then((res) => setItems(res.data || []))
       .catch((err) => console.error("❌ Error fetching menu:", err))
       .finally(() => setLoading(false));
@@ -304,7 +304,7 @@ export default function Menu({
                   <div className="relative w-24 h-24 shrink-0 rounded-xl overflow-hidden
                     sm:w-full sm:h-auto sm:aspect-square sm:shrink sm:rounded-none">
                     <img
-                      src={`http://localhost:5001${item.image}`}
+                src={`${import.meta.env.VITE_API_URL.replace("/api", "")}${item.image}`}
                       alt={item.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
