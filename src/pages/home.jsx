@@ -50,22 +50,31 @@ function Home() {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
 
       {/* ── MAIN CONTENT ── */}
-      <div className="relative w-full md:flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 pt-4 pb-2 md:py-0 grid grid-cols-1 md:grid-cols-2 items-center gap-4 sm:gap-6 md:gap-8 lg:gap-16 min-h-0">
+      <div className="relative w-full md:flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 pt-3 pb-2 md:py-0 grid grid-cols-1 md:grid-cols-2 items-center gap-4 sm:gap-5 md:gap-8 lg:gap-16 min-h-0">
 
         {/* ── LOGO — order-1 on mobile (right after navbar), order-2/right column on desktop ── */}
-        <div className="hero-fade-in delay-300 order-1 md:order-2 flex items-center justify-center md:justify-end z-10">
+        <div className="hero-fade-in delay-300 order-1 md:order-2 relative flex items-center justify-center md:justify-end z-10">
+          {/* Subtle radial glow behind the logo only */}
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              width: "80%",
+              height: "80%",
+              background: "radial-gradient(circle, rgba(200,155,60,0.22) 0%, transparent 70%)",
+            }}
+          />
           <img
             src={cafeImage}
             alt="GJ 21 Cafe Logo"
-            className="hero-float w-[190px] xs:w-[210px] sm:w-[260px] md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
+            className="hero-float relative w-[165px] xs:w-[180px] sm:w-[220px] md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
           />
         </div>
 
         {/* ── LEFT TEXT — order-2 on mobile (below logo), order-1/left column on desktop ── */}
-        <div className="order-2 md:order-1 flex flex-col gap-4 sm:gap-5 z-10">
+        <div className="order-2 md:order-1 flex flex-col items-center text-center md:items-start md:text-left gap-4 sm:gap-5 z-10">
 
           {/* Eyebrow badge */}
-          <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center gap-2.5 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 !text-[#c89b3c] px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm">
+          <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center justify-center gap-2.5 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 !text-[#c89b3c] px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c89b3c] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c89b3c]" />
@@ -74,11 +83,11 @@ function Home() {
           </div>
 
           {/* Heading */}
-          <div className="hero-fade-up delay-200 flex flex-col gap-1">
+          <div className="hero-fade-up delay-200 flex flex-col gap-1 items-center md:items-start">
             <p className="!text-white/40 text-xs sm:text-base font-medium tracking-[0.08em] uppercase">
               Welcome to
             </p>
-            <h1 className="text-[30px] xs:text-4xl sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.05] tracking-tight">
+            <h1 className="text-[36px] xs:text-[40px] sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.08] tracking-tight">
               <span className="text-shimmer">GJ 21</span>
               <span className="!text-white"> Cafe</span>
             </h1>
@@ -91,13 +100,13 @@ function Home() {
           </div>
 
           {/* Subtitle */}
-          <p className="hero-fade-up delay-300 !text-white/55 text-sm sm:text-[15px] leading-[1.6] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
+          <p className="hero-fade-up delay-300 !text-white/55 text-sm sm:text-[15px] leading-[1.75] max-w-[280px] xs:max-w-[300px] sm:max-w-[420px]">
             Where every sip tells a story ☕✨<br />
             Experience the perfect blend of taste, comfort, and vibes.
           </p>
 
-          {/* Buttons — 2 equal columns on mobile, natural width on desktop */}
-          <div className="hero-fade-up delay-400 grid grid-cols-2 sm:flex sm:flex-wrap gap-3">
+          {/* Buttons — equal width, centered as a group */}
+          <div className="hero-fade-up delay-400 grid grid-cols-2 sm:flex sm:flex-wrap gap-3 w-full max-w-xs sm:max-w-none sm:w-auto mx-auto sm:mx-0">
             <Link
               to="/menu"
               className="group relative text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] !text-white font-bold px-4 sm:px-7 py-3 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(200,155,60,0.45)] active:translate-y-0"
@@ -116,11 +125,11 @@ function Home() {
             </Link>
           </div>
 
-          {/* Stats */}
-          <div className="hero-fade-up delay-500 flex flex-wrap items-stretch gap-y-2 gap-x-0">
+          {/* Stats — equal spacing, centered */}
+          <div className="hero-fade-up delay-500 flex items-stretch justify-center md:justify-start gap-x-0 mx-auto md:mx-0">
             {stats.map(({ num, label, icon }, idx) => (
               <div key={label} className="flex items-center">
-                <div className="flex flex-col gap-0.5 px-4 sm:px-5 first:pl-0 min-w-0">
+                <div className="flex flex-col items-center md:items-start gap-0.5 px-4 sm:px-5 first:pl-0 min-w-0">
                   <div className="flex items-baseline gap-1.5">
                     <span className="text-lg sm:text-2xl font-extrabold text-[#c89b3c] leading-none">{num}</span>
                     <span className="leading-none">{icon}</span>
@@ -138,7 +147,7 @@ function Home() {
         </div>
       </div>
 
-      {/* ── BOTTOM MARQUEE — hugs directly below content, seamless infinite scroll ── */}
+      {/* ── BOTTOM MARQUEE — hugs directly below stats, seamless infinite scroll ── */}
       <div className="relative border-t border-white/[0.07] bg-white/[0.03] py-2.5 sm:py-3 overflow-hidden flex-shrink-0 z-10">
         <div className="flex animate-marquee whitespace-nowrap w-max will-change-transform">
           {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
