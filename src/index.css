@@ -1,44 +1,78 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+@theme {
+  --breakpoint-xs: 420px;
+}
+
 * {
   font-family: 'Poppins', sans-serif;
 }
 
-html,
-body,
-#root {
+html, body, #root {
   background-color: #fdfaf5;
   min-height: 100vh;
 }
 
 /* =========================================
-   ChatGPT-style Scrollbar
+   Home Hero Animations
 ========================================= */
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(120, 120, 120, 0.45) transparent;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Chrome, Edge, Safari */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(120, 120, 120, 0.45);
-  border-radius: 9999px;
-  border: 2px solid transparent;
-  background-clip: content-box;
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(120, 120, 120, 0.7);
-  background-clip: content-box;
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.06); }
+  66%       { transform: translate(-20px, 15px) scale(0.96); }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-33.333%); }
+}
+
+.hero-fade-up { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-fade-in { animation: fadeIn 0.9s ease both; }
+.hero-float   { animation: float 6s ease-in-out infinite; }
+.hero-orb     { animation: orb-drift 10s ease-in-out infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, #c89b3c 0%, #f5d280 40%, #c89b3c 60%, #e8b84b 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3.5s linear infinite;
 }

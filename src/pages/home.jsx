@@ -23,7 +23,7 @@ const marqueeItems = [
 
 function Home() {
   return (
-    <section className="relative bg-[#120a08] text-white flex flex-col justify-between overflow-hidden md:h-[calc(100vh-73px)]">
+    <section className="relative bg-[#120a08] text-white flex flex-col overflow-hidden md:h-[calc(100vh-73px)] md:justify-between">
 
       {/* ── DECORATIVE BACKGROUND ORBS ── */}
       <div
@@ -50,10 +50,10 @@ function Home() {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
 
       {/* ── MAIN CONTENT ── */}
-      <div className="relative flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 py-6 sm:py-8 md:py-0 w-full grid md:grid-cols-2 items-center gap-6 sm:gap-8 md:gap-8 lg:gap-16 min-h-0">
+      <div className="relative w-full md:flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 pt-4 pb-2 md:py-0 grid md:grid-cols-2 items-center gap-4 sm:gap-6 md:gap-8 lg:gap-16 min-h-0">
 
         {/* ── LEFT TEXT ── */}
-        <div className="flex flex-col gap-3.5 sm:gap-5 z-10">
+        <div className="flex flex-col gap-4 sm:gap-5 z-10">
 
           {/* Eyebrow badge */}
           <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center gap-2.5 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 text-[#c89b3c]/90 px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm">
@@ -69,7 +69,7 @@ function Home() {
             <p className="text-white/40 text-xs sm:text-base font-medium tracking-[0.08em] uppercase">
               Welcome to
             </p>
-            <h1 className="text-[32px] xs:text-4xl sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.05] tracking-tight">
+            <h1 className="text-[30px] xs:text-4xl sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.05] tracking-tight">
               <span className="text-shimmer">GJ 21</span>
               <span className="text-white"> Cafe</span>
             </h1>
@@ -82,7 +82,7 @@ function Home() {
           </div>
 
           {/* Subtitle */}
-          <p className="hero-fade-up delay-300 text-white/55 text-sm sm:text-[15px] leading-[1.7] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
+          <p className="hero-fade-up delay-300 text-white/55 text-sm sm:text-[15px] leading-[1.6] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
             Where every sip tells a story ☕✨<br />
             Experience the perfect blend of taste, comfort, and vibes.
           </p>
@@ -127,12 +127,12 @@ function Home() {
             ))}
           </div>
 
-          {/* ── LOGO (mobile only — sits right after stats) ── */}
-          <div className="hero-fade-in delay-300 flex md:hidden items-center justify-center pt-2">
+          {/* ── LOGO (mobile only — sits right after stats, same gap rhythm) ── */}
+          <div className="hero-fade-in delay-300 flex md:hidden items-center justify-center">
             <img
               src={cafeImage}
               alt="GJ 21 Cafe Logo"
-              className="hero-float w-[220px] xs:w-[240px] sm:w-[260px] max-w-full h-auto object-contain"
+              className="hero-float w-[220px] xs:w-[235px] sm:w-[250px] max-w-full h-auto object-contain"
             />
           </div>
         </div>
@@ -147,8 +147,8 @@ function Home() {
         </div>
       </div>
 
-      {/* ── BOTTOM MARQUEE — always pinned to bottom, seamless infinite scroll ── */}
-      <div className="relative border-t border-white/[0.07] bg-white/[0.03] py-2.5 sm:py-3 overflow-hidden flex-shrink-0 z-10 mt-4 md:mt-0">
+      {/* ── BOTTOM MARQUEE — hugs directly below content, seamless infinite scroll ── */}
+      <div className="relative border-t border-white/[0.07] bg-white/[0.03] py-2.5 sm:py-3 overflow-hidden flex-shrink-0 z-10">
         <div className="flex animate-marquee whitespace-nowrap w-max will-change-transform">
           {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
             <span
