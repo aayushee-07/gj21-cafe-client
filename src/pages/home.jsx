@@ -23,7 +23,7 @@ const marqueeItems = [
 
 function Home() {
   return (
-    <section className="relative bg-[#120a08] text-white h-[calc(100vh-73px)] flex flex-col justify-between overflow-hidden">
+    <section className="relative bg-[#120a08] text-white flex flex-col justify-between overflow-hidden md:h-[calc(100vh-73px)]">
 
       {/* ── DECORATIVE BACKGROUND ORBS ── */}
       <div
@@ -50,10 +50,10 @@ function Home() {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
 
       {/* ── MAIN CONTENT ── */}
-      <div className="relative flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 w-full grid md:grid-cols-2 items-center gap-8 sm:gap-10 md:gap-8 lg:gap-16 min-h-0">
+      <div className="relative flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 py-6 sm:py-8 md:py-0 w-full grid md:grid-cols-2 items-center gap-6 sm:gap-8 md:gap-8 lg:gap-16 min-h-0">
 
         {/* ── LEFT TEXT ── */}
-        <div className="flex flex-col gap-4 sm:gap-5 z-10">
+        <div className="flex flex-col gap-3.5 sm:gap-5 z-10">
 
           {/* Eyebrow badge */}
           <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center gap-2.5 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 text-[#c89b3c]/90 px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm">
@@ -69,7 +69,7 @@ function Home() {
             <p className="text-white/40 text-xs sm:text-base font-medium tracking-[0.08em] uppercase">
               Welcome to
             </p>
-            <h1 className="text-[34px] xs:text-4xl sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.05] tracking-tight">
+            <h1 className="text-[32px] xs:text-4xl sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.05] tracking-tight">
               <span className="text-shimmer">GJ 21</span>
               <span className="text-white"> Cafe</span>
             </h1>
@@ -82,16 +82,16 @@ function Home() {
           </div>
 
           {/* Subtitle */}
-          <p className="hero-fade-up delay-300 text-white/55 text-sm sm:text-[15px] leading-[1.75] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
+          <p className="hero-fade-up delay-300 text-white/55 text-sm sm:text-[15px] leading-[1.7] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
             Where every sip tells a story ☕✨<br />
             Experience the perfect blend of taste, comfort, and vibes.
           </p>
 
-          {/* Buttons */}
-          <div className="hero-fade-up delay-400 flex flex-wrap gap-3">
+          {/* Buttons — 2 equal columns on mobile, natural width on desktop */}
+          <div className="hero-fade-up delay-400 grid grid-cols-2 sm:flex sm:flex-wrap gap-3">
             <Link
               to="/menu"
-              className="group relative text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] text-white font-bold px-7 py-3.5 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(200,155,60,0.45)] active:translate-y-0"
+              className="group relative text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] text-white font-bold px-4 sm:px-7 py-3 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(200,155,60,0.45)] active:translate-y-0"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Order Now
@@ -101,7 +101,7 @@ function Home() {
 
             <Link
               to="/about"
-              className="text-center border border-white/15 hover:border-[#c89b3c]/40 text-white/65 hover:text-white px-7 py-3.5 sm:py-3 rounded-2xl text-sm hover:bg-white/[0.06] tracking-wide transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+              className="text-center border border-white/15 hover:border-[#c89b3c]/40 text-white/65 hover:text-white px-4 sm:px-7 py-3 sm:py-3 rounded-2xl text-sm hover:bg-white/[0.06] tracking-wide transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
             >
               About Us
             </Link>
@@ -113,10 +113,10 @@ function Home() {
               <div key={label} className="flex items-center">
                 <div className="flex flex-col gap-0.5 px-4 sm:px-5 first:pl-0 min-w-0">
                   <div className="flex items-baseline gap-1.5">
-                    <span className="text-xl sm:text-2xl font-extrabold text-[#c89b3c] leading-none">{num}</span>
+                    <span className="text-lg sm:text-2xl font-extrabold text-[#c89b3c] leading-none">{num}</span>
                     <span className="leading-none">{icon}</span>
                   </div>
-                  <p className="text-[10px] sm:text-[11px] text-white/35 font-medium tracking-widest uppercase whitespace-nowrap mt-1">
+                  <p className="text-[9px] sm:text-[11px] text-white/35 font-medium tracking-widest uppercase whitespace-nowrap mt-1">
                     {label}
                   </p>
                 </div>
@@ -126,25 +126,34 @@ function Home() {
               </div>
             ))}
           </div>
+
+          {/* ── LOGO (mobile only — sits right after stats) ── */}
+          <div className="hero-fade-in delay-300 flex md:hidden items-center justify-center pt-2">
+            <img
+              src={cafeImage}
+              alt="GJ 21 Cafe Logo"
+              className="hero-float w-[220px] xs:w-[240px] sm:w-[260px] max-w-full h-auto object-contain"
+            />
+          </div>
         </div>
 
-        {/* ── RIGHT LOGO ── */}
-        <div className="hero-fade-in delay-300 flex items-center justify-center md:justify-end z-10">
+        {/* ── LOGO (desktop — right column) ── */}
+        <div className="hero-fade-in delay-300 hidden md:flex items-center justify-end z-10">
           <img
             src={cafeImage}
             alt="GJ 21 Cafe Logo"
-            className="hero-float w-40 xs:w-48 sm:w-64 md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
+            className="hero-float md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
           />
         </div>
       </div>
 
-      {/* ── BOTTOM MARQUEE ── */}
-      <div className="relative border-t border-white/[0.07] bg-white/[0.03] py-2.5 sm:py-3 overflow-hidden flex-shrink-0 z-10">
-        <div className="flex gap-8 sm:gap-14 animate-marquee whitespace-nowrap w-max">
-          {[...marqueeItems, ...marqueeItems].map((item, i) => (
+      {/* ── BOTTOM MARQUEE — always pinned to bottom, seamless infinite scroll ── */}
+      <div className="relative border-t border-white/[0.07] bg-white/[0.03] py-2.5 sm:py-3 overflow-hidden flex-shrink-0 z-10 mt-4 md:mt-0">
+        <div className="flex animate-marquee whitespace-nowrap w-max will-change-transform">
+          {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
             <span
               key={i}
-              className="text-white/50 text-[9px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase"
+              className="text-white/50 text-[9px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase mr-8 sm:mr-14"
             >
               {item}
             </span>
