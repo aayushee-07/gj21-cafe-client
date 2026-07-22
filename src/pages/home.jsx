@@ -50,13 +50,22 @@ function Home() {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
 
       {/* ── MAIN CONTENT ── */}
-      <div className="relative w-full md:flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 pt-4 pb-2 md:py-0 grid md:grid-cols-2 items-center gap-4 sm:gap-6 md:gap-8 lg:gap-16 min-h-0">
+      <div className="relative w-full md:flex-1 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-14 pt-4 pb-2 md:py-0 grid grid-cols-1 md:grid-cols-2 items-center gap-4 sm:gap-6 md:gap-8 lg:gap-16 min-h-0">
 
-        {/* ── LEFT TEXT ── */}
-        <div className="flex flex-col gap-4 sm:gap-5 z-10">
+        {/* ── LOGO — order-1 on mobile (right after navbar), order-2/right column on desktop ── */}
+        <div className="hero-fade-in delay-300 order-1 md:order-2 flex items-center justify-center md:justify-end z-10">
+          <img
+            src={cafeImage}
+            alt="GJ 21 Cafe Logo"
+            className="hero-float w-[190px] xs:w-[210px] sm:w-[260px] md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
+          />
+        </div>
+
+        {/* ── LEFT TEXT — order-2 on mobile (below logo), order-1/left column on desktop ── */}
+        <div className="order-2 md:order-1 flex flex-col gap-4 sm:gap-5 z-10">
 
           {/* Eyebrow badge */}
-          <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center gap-2.5 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 text-[#c89b3c]/90 px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm">
+          <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center gap-2.5 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 !text-[#c89b3c] px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c89b3c] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c89b3c]" />
@@ -66,12 +75,12 @@ function Home() {
 
           {/* Heading */}
           <div className="hero-fade-up delay-200 flex flex-col gap-1">
-            <p className="text-white/40 text-xs sm:text-base font-medium tracking-[0.08em] uppercase">
+            <p className="!text-white/40 text-xs sm:text-base font-medium tracking-[0.08em] uppercase">
               Welcome to
             </p>
             <h1 className="text-[30px] xs:text-4xl sm:text-5xl md:text-[52px] lg:text-[62px] xl:text-[68px] font-extrabold leading-[1.05] tracking-tight">
               <span className="text-shimmer">GJ 21</span>
-              <span className="text-white"> Cafe</span>
+              <span className="!text-white"> Cafe</span>
             </h1>
           </div>
 
@@ -82,7 +91,7 @@ function Home() {
           </div>
 
           {/* Subtitle */}
-          <p className="hero-fade-up delay-300 text-white/55 text-sm sm:text-[15px] leading-[1.6] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
+          <p className="hero-fade-up delay-300 !text-white/55 text-sm sm:text-[15px] leading-[1.6] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
             Where every sip tells a story ☕✨<br />
             Experience the perfect blend of taste, comfort, and vibes.
           </p>
@@ -91,7 +100,7 @@ function Home() {
           <div className="hero-fade-up delay-400 grid grid-cols-2 sm:flex sm:flex-wrap gap-3">
             <Link
               to="/menu"
-              className="group relative text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] text-white font-bold px-4 sm:px-7 py-3 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(200,155,60,0.45)] active:translate-y-0"
+              className="group relative text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] !text-white font-bold px-4 sm:px-7 py-3 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(200,155,60,0.45)] active:translate-y-0"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Order Now
@@ -101,7 +110,7 @@ function Home() {
 
             <Link
               to="/about"
-              className="text-center border border-white/15 hover:border-[#c89b3c]/40 text-white/65 hover:text-white px-4 sm:px-7 py-3 sm:py-3 rounded-2xl text-sm hover:bg-white/[0.06] tracking-wide transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
+              className="text-center border border-white/15 hover:border-[#c89b3c]/40 !text-white/65 hover:!text-white px-4 sm:px-7 py-3 sm:py-3 rounded-2xl text-sm hover:bg-white/[0.06] tracking-wide transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm"
             >
               About Us
             </Link>
@@ -116,7 +125,7 @@ function Home() {
                     <span className="text-lg sm:text-2xl font-extrabold text-[#c89b3c] leading-none">{num}</span>
                     <span className="leading-none">{icon}</span>
                   </div>
-                  <p className="text-[9px] sm:text-[11px] text-white/35 font-medium tracking-widest uppercase whitespace-nowrap mt-1">
+                  <p className="text-[9px] sm:text-[11px] !text-white/35 font-medium tracking-widest uppercase whitespace-nowrap mt-1">
                     {label}
                   </p>
                 </div>
@@ -126,24 +135,6 @@ function Home() {
               </div>
             ))}
           </div>
-
-          {/* ── LOGO (mobile only — sits right after stats, same gap rhythm) ── */}
-          <div className="hero-fade-in delay-300 flex md:hidden items-center justify-center">
-            <img
-              src={cafeImage}
-              alt="GJ 21 Cafe Logo"
-              className="hero-float w-[220px] xs:w-[235px] sm:w-[250px] max-w-full h-auto object-contain"
-            />
-          </div>
-        </div>
-
-        {/* ── LOGO (desktop — right column) ── */}
-        <div className="hero-fade-in delay-300 hidden md:flex items-center justify-end z-10">
-          <img
-            src={cafeImage}
-            alt="GJ 21 Cafe Logo"
-            className="hero-float md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
-          />
         </div>
       </div>
 
@@ -153,7 +144,7 @@ function Home() {
           {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
             <span
               key={i}
-              className="text-white/50 text-[9px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase mr-8 sm:mr-14"
+              className="!text-white/50 text-[9px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase mr-8 sm:mr-14"
             >
               {item}
             </span>

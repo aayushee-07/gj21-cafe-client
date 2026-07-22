@@ -5,6 +5,10 @@
   --breakpoint-xs: 420px;
 }
 
+html {
+  color-scheme: dark light;
+}
+
 * {
   font-family: 'Poppins', sans-serif;
 }
