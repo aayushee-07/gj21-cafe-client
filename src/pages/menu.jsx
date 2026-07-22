@@ -207,25 +207,7 @@ export default function Menu({
           </div>
 
           {/* Fav + Cart — absolute right */}
-          {!isAdmin && (
-            <div className="absolute right-0 flex items-center gap-4">
-              <Link
-                to="/favorites"
-                className="flex items-center gap-2 text-rose-500 hover:text-rose-600 transition"
-              >
-                <FaHeart className="text-2xl" />
-                <span className="font-bold text-base">{favorites?.length || 0}</span>
-              </Link>
-              <Link
-                to="/cart"
-                className="flex items-center gap-2 text-[#c89b3c] hover:text-[#b88a2f] transition"
-              >
-                <FaShoppingCart className="text-2xl" />
-                <span className="font-bold text-base">{totalCartCount}</span>
-              </Link>
-            </div>
-          )}
-
+          
         </div>
 
         {/* ── SEARCH + SORT (desktop only) — search left, sort far right ── */}

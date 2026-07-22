@@ -41,10 +41,7 @@ export default function Navbar({ user, setUser, cartItems, favorites }) {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
 
         {/* ── LOGO ── */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-[#c89b3c] rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-            <span className="text-white font-bold text-sm">GJ</span>
-          </div>
+        <Link to="/" className="group">
           <span className="text-xl md:text-2xl font-bold tracking-wide">
             GJ <span className="text-[#c89b3c]">21</span>{" "}
             <span className="text-stone-700">Cafe</span>
