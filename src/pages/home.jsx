@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FiArrowRight } from "react-icons/fi";
+import { GiCoffeeCup, GiSparkles, GiTrophy, GiForkKnifeSpoon } from "react-icons/gi";
+import { FaStar } from "react-icons/fa";
 import cafeImage from "/cafelogo1.png";
 
 const stats = [
-  { num: "4.6+", label: "Star Rating", icon: "⭐" },
-  { num: "2+",   label: "Years Open",  icon: "🏆" },
-  { num: "50+",  label: "Menu Items",  icon: "🍽️" },
+  { num: "4.6+", label: "Star Rating", icon: <FaStar className="text-[#c89b3c]" /> },
+  { num: "2+",   label: "Years Open",  icon: <GiTrophy className="text-[#c89b3c]" /> },
+  { num: "50+",  label: "Menu Items",  icon: <GiForkKnifeSpoon className="text-[#c89b3c]" /> },
 ];
 
 const marqueeItems = [
@@ -18,17 +22,23 @@ const marqueeItems = [
   "🚚 Home Delivery",
 ];
 
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
+});
+
 function Home() {
   return (
     <section className="relative bg-[#120a08] text-white h-[calc(100vh-73px)] flex flex-col justify-between overflow-hidden">
 
       {/* ── DECORATIVE BACKGROUND ORBS ── */}
       <div
-        className="hero-orb absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full pointer-events-none"
+        className="absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(200,155,60,0.13) 0%, transparent 70%)" }}
       />
       <div
-        className="hero-orb delay-400 absolute -bottom-24 -right-24 w-[360px] h-[360px] rounded-full pointer-events-none"
+        className="absolute -bottom-24 -right-24 w-[360px] h-[360px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(200,155,60,0.09) 0%, transparent 70%)" }}
       />
       {/* Fine grain overlay */}
@@ -53,16 +63,23 @@ function Home() {
         <div className="flex flex-col gap-4 sm:gap-5 z-10">
 
           {/* Eyebrow badge */}
-          <div className="hero-fade-up delay-100 inline-flex flex-wrap items-center gap-2.5 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 text-[#c89b3c]/90 px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm">
+          <motion.div
+            {...fadeUp(0.1)}
+            className="inline-flex flex-wrap items-center gap-2.5 w-fit max-w-full bg-[#c89b3c]/10 border border-[#c89b3c]/20 text-[#c89b3c]/90 px-4 py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm"
+          >
             <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c89b3c] opacity-75" />
+              <motion.span
+                className="absolute inline-flex h-full w-full rounded-full bg-[#c89b3c]"
+                animate={{ scale: [1, 2], opacity: [0.75, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+              />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c89b3c]" />
             </span>
             <span>Now Open · 2 PM – 2 AM</span>
-          </div>
+          </motion.div>
 
           {/* Heading */}
-          <div className="hero-fade-up delay-200 flex flex-col gap-1">
+          <motion.div {...fadeUp(0.2)} className="flex flex-col gap-1">
             <p className="text-white/40 text-xs sm:text-base font-medium tracking-[0.08em] uppercase">
               Welcome to
             </p>
@@ -70,29 +87,33 @@ function Home() {
               <span className="text-shimmer">GJ 21</span>
               <span className="text-white"> Cafe</span>
             </h1>
-          </div>
+          </motion.div>
 
           {/* Divider */}
-          <div className="hero-fade-up delay-200 flex items-center gap-3">
+          <motion.div {...fadeUp(0.2)} className="flex items-center gap-3">
             <div className="w-10 h-[2px] bg-gradient-to-r from-[#c89b3c] to-[#c89b3c]/20 rounded-full" />
             <div className="w-2 h-[2px] bg-[#c89b3c]/20 rounded-full" />
-          </div>
+          </motion.div>
 
           {/* Subtitle */}
-          <p className="hero-fade-up delay-300 text-white/55 text-sm sm:text-[15px] leading-[1.75] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]">
-            Where every sip tells a story ☕✨<br />
+          <motion.p
+            {...fadeUp(0.3)}
+            className="text-white/55 text-sm sm:text-[15px] leading-[1.75] sm:leading-[1.85] max-w-[300px] sm:max-w-[420px]"
+          >
+            Where every sip tells a story <GiCoffeeCup className="inline mb-1" /> <GiSparkles className="inline mb-1 text-[#c89b3c]" />
+            <br />
             Experience the perfect blend of taste, comfort, and vibes.
-          </p>
+          </motion.p>
 
           {/* Buttons */}
-          <div className="hero-fade-up delay-400 flex flex-wrap gap-3">
+          <motion.div {...fadeUp(0.4)} className="flex flex-wrap gap-3">
             <Link
               to="/menu"
               className="group relative text-center overflow-hidden bg-[#c89b3c] hover:bg-[#b88a2f] text-white font-bold px-7 py-3.5 sm:py-3 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(200,155,60,0.45)] active:translate-y-0"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Order Now
-                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>
 
@@ -102,10 +123,10 @@ function Home() {
             >
               About Us
             </Link>
-          </div>
+          </motion.div>
 
           {/* Stats */}
-          <div className="hero-fade-up delay-500 flex flex-wrap items-stretch gap-y-2 gap-x-0">
+          <motion.div {...fadeUp(0.5)} className="flex flex-wrap items-stretch gap-y-2 gap-x-0">
             {stats.map(({ num, label, icon }, idx) => (
               <div key={label} className="flex items-center">
                 <div className="flex flex-col gap-0.5 px-4 sm:px-5 first:pl-0 min-w-0">
@@ -122,17 +143,24 @@ function Home() {
                 )}
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        {/* ── RIGHT LOGO — bare image, real transparency, no wrapper/blend/gradient ── */}
-        <div className="hero-fade-in delay-300 flex items-center justify-center md:justify-end z-10">
-          <img
+        {/* ── RIGHT LOGO ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.3 }}
+          className="flex items-center justify-center md:justify-end z-10"
+        >
+          <motion.img
             src={cafeImage}
             alt="GJ 21 Cafe Logo"
-            className="hero-float w-40 xs:w-48 sm:w-64 md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
+            animate={{ y: [0, -14, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="w-40 xs:w-48 sm:w-64 md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
           />
-        </div>
+        </motion.div>
       </div>
 
       {/* ── BOTTOM MARQUEE ── */}
