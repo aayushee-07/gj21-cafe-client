@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
-import axios from "axios";
+import api from "../lib/apiClient";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+const SERVER_URL = (
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api"
+).replace("/api", "");
 
 export default function Menu({
   user,
@@ -21,12 +24,15 @@ export default function Menu({
   /* ===============================
      FETCH MENU (AUTO REFRESH ENABLED)
   =============================== */
-  const fetchMenu = () => {
-    axios
-    api.get("/menu")
-      .then((res) => setItems(res.data || []))
-      .catch((err) => console.error("❌ Error fetching menu:", err))
-      .finally(() => setLoading(false));
+  const fetchMenu = async () => {
+    try {
+      const res = await api.get("/menu");
+      setItems(res.data || []);
+    } catch (err) {
+      console.error("❌ Error fetching menu:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -202,22 +208,22 @@ export default function Menu({
 
           {/* Fav + Cart — absolute right */}
           {!isAdmin && (
-          <div className="absolute right-0 flex items-center gap-4">
-            <Link
-              to="/favorites"
-              className="flex items-center gap-2 text-rose-500 hover:text-rose-600 transition"
-            >
-              <FaHeart className="text-2xl" />
-              <span className="font-bold text-base">{favorites?.length || 0}</span>
-            </Link>
-            <Link
-              to="/cart"
-              className="flex items-center gap-2 text-[#c89b3c] hover:text-[#b88a2f] transition"
-            >
-              <FaShoppingCart className="text-2xl" />
-              <span className="font-bold text-base">{totalCartCount}</span>
-            </Link>
-          </div>
+            <div className="absolute right-0 flex items-center gap-4">
+              <Link
+                to="/favorites"
+                className="flex items-center gap-2 text-rose-500 hover:text-rose-600 transition"
+              >
+                <FaHeart className="text-2xl" />
+                <span className="font-bold text-base">{favorites?.length || 0}</span>
+              </Link>
+              <Link
+                to="/cart"
+                className="flex items-center gap-2 text-[#c89b3c] hover:text-[#b88a2f] transition"
+              >
+                <FaShoppingCart className="text-2xl" />
+                <span className="font-bold text-base">{totalCartCount}</span>
+              </Link>
+            </div>
           )}
 
         </div>
@@ -304,7 +310,7 @@ export default function Menu({
                   <div className="relative w-24 h-24 shrink-0 rounded-xl overflow-hidden
                     sm:w-full sm:h-auto sm:aspect-square sm:shrink sm:rounded-none">
                     <img
-                src={`${import.meta.env.VITE_API_URL.replace("/api", "")}${item.image}`}
+                      src={`${SERVER_URL}${item.image}`}
                       alt={item.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -320,20 +326,20 @@ export default function Menu({
 
                     {/* Favorite button on image */}
                     {!isAdmin && (
-                    <button
-                      onClick={() => toggleFavorite(item)}
-                      className={`absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center
+                      <button
+                        onClick={() => toggleFavorite(item)}
+                        className={`absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center
                       justify-center shadow-md transition-all duration-150 hover:scale-110
                       ${isFav
-                        ? "bg-rose-500 text-white"
-                        : "bg-white/90 backdrop-blur-sm text-stone-400 hover:text-rose-500"
-                      }`}
-                    >
-                      {isFav ? <FaHeart className="text-xs" /> : <FaRegHeart className="text-xs" />}
-                    </button>
+                            ? "bg-rose-500 text-white"
+                            : "bg-white/90 backdrop-blur-sm text-stone-400 hover:text-rose-500"
+                          }`}
+                      >
+                        {isFav ? <FaHeart className="text-xs" /> : <FaRegHeart className="text-xs" />}
+                      </button>
                     )}
                   </div>
-                  
+
 
                   {/* BODY */}
                   <div className="flex-1 min-w-0 flex flex-col justify-center sm:justify-start sm:flex-grow sm:p-4">
