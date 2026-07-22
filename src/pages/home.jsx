@@ -23,7 +23,7 @@ const marqueeItems = [
 
 function Home() {
   return (
-    <section className="relative bg-[#120a08] text-white flex flex-col overflow-hidden md:h-[calc(100vh-73px)] md:justify-between">
+    <section className="relative bg-[#120a08] text-white h-auto flex flex-col overflow-hidden md:h-[calc(100vh-73px)] md:justify-between">
 
       {/* ── DECORATIVE BACKGROUND ORBS ── */}
       <div
@@ -66,7 +66,7 @@ function Home() {
           <img
             src={cafeImage}
             alt="GJ 21 Cafe Logo"
-            className="hero-float relative w-[165px] xs:w-[180px] sm:w-[220px] md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
+            className="hero-float relative w-[210px] xs:w-[230px] sm:w-[260px] md:w-[380px] lg:w-[460px] xl:w-[520px] max-w-full h-auto object-contain"
           />
         </div>
 
