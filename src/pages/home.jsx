@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
+import { FaStar, FaTrophy } from "react-icons/fa";
+import { GiForkKnifeSpoon } from "react-icons/gi";
 import cafeImage from "/cafelogo1.png";
 
 const stats = [
-  { num: "4.6+", label: "Star Rating", icon: "⭐" },
-  { num: "2+",   label: "Years Open",  icon: "🏆" },
-  { num: "50+",  label: "Menu Items",  icon: "🍽️" },
+  { num: "4.6+", label: "Star Rating", icon: <FaStar className="text-[#c89b3c] text-base" /> },
+  { num: "2+",   label: "Years Open",  icon: <FaTrophy className="text-[#c89b3c] text-base" /> },
+  { num: "50+",  label: "Menu Items",  icon: <GiForkKnifeSpoon className="text-[#c89b3c] text-base" /> },
 ];
 
 const marqueeItems = [
@@ -92,7 +95,7 @@ function Home() {
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Order Now
-                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>
 
@@ -111,7 +114,7 @@ function Home() {
                 <div className="flex flex-col gap-0.5 px-4 sm:px-5 first:pl-0 min-w-0">
                   <div className="flex items-baseline gap-1.5">
                     <span className="text-xl sm:text-2xl font-extrabold text-[#c89b3c] leading-none">{num}</span>
-                    <span className="text-base leading-none">{icon}</span>
+                    <span className="leading-none">{icon}</span>
                   </div>
                   <p className="text-[10px] sm:text-[11px] text-white/35 font-medium tracking-widest uppercase whitespace-nowrap mt-1">
                     {label}
@@ -125,7 +128,7 @@ function Home() {
           </div>
         </div>
 
-        {/* ── RIGHT LOGO — bare image, real transparency, no wrapper/blend/gradient ── */}
+        {/* ── RIGHT LOGO ── */}
         <div className="hero-fade-in delay-300 flex items-center justify-center md:justify-end z-10">
           <img
             src={cafeImage}
